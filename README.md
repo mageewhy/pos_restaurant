@@ -68,42 +68,11 @@ Built ideally for developers, designers, and startups, or Creators, Hope UI brin
   <img src="https://assets.iqonic.design/hope-ui/github/hope-ui-youtube.png" alt="Hope UI Video" />
 </a>
 
-# Table of Contents
-
-  - [Quick Start](#quick-start)
-    - [Method 1: Direct Download](#method-1-direct-download)
-    - [Method 2: Using CDN](#method-2-using-cdn)
-    - [Method 3: Using NPM](#method-3-using-npm)
-  - [Documentation](#documentation)
-  - [Version](#version)
-  - [Public RoadMap](#public-roadmap)
-  - [File Structure](#file-structure)
-  - [Browser Support](#browser-support)
-  - [Don't Buy a Coffee for Us Instead Support Us](#dont-buy-a-coffee-for-us-instead-support-us)
-  - [More from Iqonic Design](#more-from-iqonic-design)
-  - [Reporting Issues](#reporting-issues)
-  - [Special Thanks](#special-thanks)
-  - [Change Log](#change-log)
-  - [Follow Us](#follow-us)
-  - [Licensing](#licensing)
-
 ## Quick Start
 
 You can use following method to get started with CSS and JS files of the design system.
 
-### Method 1: Direct Download
-[Dowload from Github](https://github.com/tafcoder/sleek-dashboard/archive/refs/heads/master.zip)
-
-[Download from Iqonic Design](https://iqonic.design/product/admin-templates/hope-ui-admin-free-open-source-bootstrap-admin-template/?utm_source=github&utm_medium=github-description&utm_campaign=open_source_github)
-### Method 2: Using CDN
-```
-<link href="https://cdn.jsdelivr.net/gh/iqonicdesignofficial/hope-ui-design-system@main/dist/assets/css/hope-ui.min.css" rel="stylesheet"/>
-```
-
-```
-<script src="https://cdn.jsdelivr.net/gh/iqonicdesignofficial/hope-ui-design-system@main/dist/assets/js/hope-ui.js"></script>
-```
-### Method 3: Using NPM
+### Method: Using NPM
 Start working with the design system
 1. Install node_modules Run in terminal or CMD:
 ```
@@ -270,36 +239,5 @@ laravel
 ![Microsoft](https://assets.iqonic.design/hope-ui/github/Microsoft%20edge.png)
 ![Operamini](https://assets.iqonic.design/hope-ui/github/Operamini.png)
 
-## Don't Buy a Coffee for Us Instead Support Us
-- Star our GitHub repo ⭐
-- [Tweet about it](https://twitter.com/intent/tweet?text=Checkout%20%23HopeUI%20%E2%80%93%20Amazing%20open-source%20Bootstrap%205%20Admin%20Dashboard%20%26%20Design%20system.%20%23BuildwithHopeUI&url=https%3A%2F%2Fbit.ly%2F3ANB7gT).
-- Submit bugs, or suggest new features and documentation updates 🔧
-- Follow [@iqonicdesign](https://twitter.com/iqonicdesign) on Twitter.
-- Follow Us on [Instagram](https://www.instagram.com/iqonicdesign/)
-- Subscribe to Iqonic newsletter at [iqonic.design](https://iqonic.design)
-
-## More from Iqonic Design
-- [Free Products Every Week](https://iqonic.design/?utm_source=github&utm_medium=github-description&utm_campaign=open_source_github)
-- [Premium Themes, templates, dashbaords, Apps, and more](https://iqonic.design/shop/?iqonic=1&orderby=sales&paged=1&product_for=premium)
-- [Subscribe on Youtube](https://www.youtube.com/c/IqonicDesign)
-- [Reach US](https://iqonic.design/contact-us/)
-## Reporting Issues
-Have a bug or a feature request? Raise a new issue at our [github](https://github.com/iqonicdesignofficial/hope-ui-design-system/issues) support
-
-## Special Thanks
-- [Bootstrap](https://getbootstrap.com/)
-- [Google Fonts](https://www.google.com/fonts)
-- [Jquery](https://jquery.com/)
-- [Apex Charts](https://apexcharts.com/)
-[Checkout complete list](https://templates.iqonic.design/hope-ui/documentation/html/dist/main/sourceAndCredit.html)
-
-## Change Log
-[Click Here](https://templates.iqonic.design/hope-ui/documentation/html/dist/main/change-log.html) to check our full change log.
-## Follow Us
-- [Twitter](https://twitter.com/iqonicdesign)
-- [Facebook](https://www.facebook.com/iqonicdesign/)
-- [Dribbble](https://dribbble.com/IqonicDesign)
-- [Instagram](https://www.instagram.com/iqonicdesign/)
-- [Product Hunt](https://www.producthunt.com/posts/iqonic-design)
 ## Licensing
 - Code and Documentation Copyright 2021 All Rights Reserved by [IQONIC](https://iqonic.design/?utm_source=github&utm_medium=github-description&utm_campaign=open_source_github) Design. Code released under the [MIT](https://iqonic.design/licenses/) License.
