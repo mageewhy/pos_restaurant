@@ -1,10 +1,5 @@
 
 <p align="center">
-  <a href="https://hopeui.iqonic.design/?utm_source=github&utm_medium=github-description&utm_campaign=open_source_github" target="__blank" title="Hope UI">
-    <img src="https://assets.iqonic.design/hope-ui/github/logo.png" />
-  </a>
-</p>
-<p align="center">
 <a href="https://github.com/iqonicdesignofficial/hope-ui-design-system/" target="__blank"><img src="https://img.shields.io/github/stars/iqonicdesignofficial/hope-ui-design-system" /> </a>
 <a href="https://github.com/iqonicdesignofficial/hope-ui-design-system/network" target="__blank"><img src="https://img.shields.io/github/forks/iqonicdesignofficial/hope-ui-design-system" /> </a>
 <a href="https://github.com/iqonicdesignofficial/hope-ui-design-system/issues" target="__blank"><img src="https://img.shields.io/github/issues/iqonicdesignofficial/hope-ui-design-system" /> </a>
@@ -14,13 +9,6 @@
 </p>
 <h3 align="center">Free Open Source Bootstrap 5 Design System.</h3>
 
-<h3> </h3>
-
-------------
-
-<a href="https://templates.iqonic.design/hope-ui/html/dist" target="__blank" title="Hope UI Dashboard">
-  <img src="https://assets.iqonic.design/hope-ui/github/rtl-mode-min.png" alt="Hope UI Dashboard" />
-</a>
 
 Hope UI – free open source Bootstrap Design System is a gorgeously built UI kit based on bootstrap 5. The best free Bootstrap 5 design system is fully responsive and user-friendly, allowing Hope UI users to work effortlessly.
 Being easily adaptable and flexible, Hope UI can be a go-to design system for the developer out there.
