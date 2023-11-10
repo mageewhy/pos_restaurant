@@ -1,4 +1,4 @@
-<h1> Group 11 Management Information System (MIS) Project Year 4 using HopeUI Template</h1>
+<h1> Group 11 Management Information System (MIS) Project Year 4 using HopeUI Template (Point of Sale System for Restaurant)</h1>
 
 <p align="center">
   <a href="https://hopeui.iqonic.design/?utm_source=github&utm_medium=github-description&utm_campaign=open_source_github" target="__blank" title="Hope UI">
