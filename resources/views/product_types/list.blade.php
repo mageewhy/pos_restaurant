@@ -6,14 +6,14 @@
                     <div class="d-flex flex-wrap align-items-start">
                         <div class="d-flex flex-wrap">
                             <div class="d-flex flex-wrap  mb-3 mb-sm-0">
-                                <h4 class="me-2 h4">Products</h4>
+                                <h4 class="me-2 h4">Product Types</h4>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex flex-wrap align-items-end">
                         <div class="d-flex flex-wrap">
                             <div class="d-flex flex-wrap  mb-3 mb-sm-0">
-                                <a href="{{route('products.create')}}">Add Products</a>
+                                <a href="{{route('product_types.create')}}">Add Product Types</a>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="header-title">
-                        <h4 class="card-title">Product List</h4>
+                        <h4 class="card-title">Product Types List</h4>
                     </div>
                 </div>
                 <div class="card-body">

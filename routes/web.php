@@ -8,6 +8,7 @@ use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductTypeController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Product Module
     Route::resource('products', ProductController::class);
+
+    //Product Module
+    Route::resource('product_types', ProductTypeController::class);
 
     //App Details Page => 'Dashboard'], function() {
     Route::group(['prefix' => 'menu-style'], function() {
