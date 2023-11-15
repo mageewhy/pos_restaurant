@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductSizePrice;
 use App\Models\ProductType;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::latest()->paginate(10);
+        $data = Product::latest()->whereNull('deleted_at')->paginate(10);
 
         return view('products.list', compact('data'));
     }
@@ -41,9 +42,49 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required',
+            'detail' => 'required|string',
+            'image' => 'required|image',
+            'product' => 'required',
+            'product.*.size' => 'required',
+            'product.*.price' => 'required',
+        ]);
 
+        DB::beginTransaction();
+
+        try {
+            $image = '';
+            if($request->hasFile('image')){
+                $image = "/" .$request->file('image')->store('images','public');
+            }
+
+            $product = Product::create([
+                'name' => $request->name,
+                'product_type_id'=> 1,
+                'detail'=> $request->detail,
+                'image' => $image
+            ]);
+
+
+
+            foreach ($request->product as $key => $value) {
+                $product->productSizePrice()->create([
+                    'size' => $value['size'],
+                    'price' => $value['price'],
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('products.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e);
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -63,9 +104,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
+        $data = Product::findOrFail($id);
 
+        return view('products.edit', compact('data'));
     }
 
     /**
@@ -75,9 +118,52 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update($id, Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required',
+            'detail' => 'required|string',
+            'image' => 'nullable|image',
+            'product' => 'required',
+            'product.*.size' => 'required',
+            'product.*.price' => 'required',
+        ]);
 
+        DB::beginTransaction();
+
+        try {
+            $product = Product::findOrFail($id);
+
+            $image = $product->image;
+            if($request->hasFile('image')){
+                $image = "/" .$request->file('image')->store('images','public');
+            }
+
+            $product->update([
+                'name' => $request->name,
+                'product_type_id'=> 1,
+                'detail'=> $request->detail,
+                'image' => $image
+            ]);
+
+
+            $product->productSizePrice()->delete();
+
+            foreach ($request->product as $key => $value) {
+                $product->productSizePrice()->create([
+                    'size' => $value['size'],
+                    'price' => $value['price'],
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('products.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e);
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -86,8 +172,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-
+        Product::find($id)->delete();
     }
 }

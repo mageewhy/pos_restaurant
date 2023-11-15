@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -35,47 +35,29 @@
                                 <th>Product ID</th>
                                 <th>Product Name</th>
                                 <th>Type</th>
-                                <th>Detail</th>
-                                <th>Price to Size</th>
                                 <th>Image</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded img-fluid avatar-40 me-3 bg-soft-primary"
-                                            src="{{ asset('images/shapes/01.png') }}" alt="profile">
-                                        <h6>Soft UI XD Version</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                        </a>
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                        </a>
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>$14000</td>
-                                <td>
-                                    <div class="text-info">Pending</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h6>60%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-info shadow-none w-100" style="height: 6px">
-                                        <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
+                            @foreach ($data as $key => $value)
+                                <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->name}}</td>
+                                    <td>{{$value->product_type_id}}</td>
+                                    <td><img src="/storage/{{$value->image}}" alt="" width="100"></td>
+                                    <td class="d-flex">
+                                        <a class="btn btn-warning me-3" href="{{route('products.edit', $value->id)}}">Edit</a>
+                                        <form action="{{ route('products.destroy', $value->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onClick="return confirm('Are You Absolutely Sure You Want to Delete the Data?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tr>
+
                         </tbody>
                     </table>
                 </div>

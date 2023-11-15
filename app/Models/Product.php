@@ -4,17 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         "prod_id",
         "name",
-        "type",
+        "product_type_id",
         "detail",
-        "price_size",
         "image",
     ];
+
+    public function productSizePrice()
+    {
+        return $this->hasMany(ProductSizePrice::class);
+    }
 }

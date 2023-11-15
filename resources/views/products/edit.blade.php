@@ -1,43 +1,45 @@
-<x-app-layout :assets="$assets ?? []">
+divdiv<x-app-layout :assets="$assets ?? []">
     <div>
         <div class="row">
             <div class="col-sm-12 col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                           <h4 class="card-title">Add New Product</h4>
+                           <h4 class="card-title">Update {{$data->name}}</h4>
                         </div>
                      </div>
                      <div class="card-body">
-                        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{route('products.update', $data->id)}}" method="POST" enctype="multipart/form-data" >
                             @csrf
-                            @method('POST')
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationProductName">Product Name</label>
-                                    <input type="text" class="form-control" name="name" id="validationProductName" required>
+                                    <input type="text" class="form-control" name="name" id="validationProductName" value="{{$data->name}}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationType">Product Type</label>
-                                    <input type="text" name="type" class="form-control" id="validationType" required>
+                                    <input type="text" name="type" value="{{$data->product_type_id}}" class="form-control" id="validationType" required>
                                 </div>
                                 <div class="col-md-12 mb-6">
                                     <label for="validationDetail" class="form-label">Detail</label>
-                                    <textarea name="detail" id="validationDetail" class="form-control"></textarea>
+                                    <textarea name="detail" id="validationDetail" class="form-control">{{$data->detail}}</textarea>
                                 </div>
                                 <div class="col-md-12 mb-6">
                                     <label class="form-label" for="file">Image</label>
-                                    <input type="file" name="image" class="form-control" id="file" required>
+                                    <input type="file" name="image" class="form-control" value="{{$data->image}}" id="file" >
                                 </div>
                                 <div id="sizeprice" class="row">
-                                    <div class="col-md-6 mb-3" id="size">
-                                        <label class="form-label" for="size">Size</label>
-                                        <input type="text" name="product[0][size]" class="form-control">
-                                    </div>
-                                    <div class="col-md-6 mb-3" id="price">
-                                        <label class="form-label">Price</label>
-                                        <input type="text" name="product[0][price]" class="form-control">
-                                    </div>
+                                    @foreach($data->productSizePrice as $key => $value)
+                                        <div class="col-md-6 mb-3" id="size">
+                                            <label class="form-label" for="size">Size</label>
+                                            <input type="text" name="product[{{$key}}][size]" value="{{$value->size}}" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3" id="price">
+                                            <label class="form-label">Price</label>
+                                            <input type="text" name="product[{{$key}}][price]" value="{{$value->price}}" class="form-control">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -62,7 +64,7 @@
     const removeButton = document.getElementById('remove');
     const sizePrice = document.getElementById('sizeprice');
     var count = sizePrice.children.length / 2;
-
+    console.log(sizePrice.children);
     addButton.addEventListener('click', function(e) {
         e.preventDefault();
         const size = document.getElementById('size');
@@ -80,7 +82,6 @@
         sizePrice.appendChild(clonePrice);
         count++;
     });
-
     removeButton.addEventListener('click', function(e) {
         e.preventDefault();
         if (count > 1) {
