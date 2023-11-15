@@ -32,51 +32,42 @@
                     <table id="basic-table" class="table table-striped mb-0" role="grid">
                         <thead>
                             <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>Type</th>
-                                <th>Detail</th>
-                                <th>Price to Size</th>
-                                <th>Image</th>
+                                <th>ID</th>
+                                <th>Product Type</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded img-fluid avatar-40 me-3 bg-soft-primary"
-                                            src="{{ asset('images/shapes/01.png') }}" alt="profile">
-                                        <h6>Soft UI XD Version</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                        </a>
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                        </a>
-                                        <a href="#" class="iq-media-1">
-                                            <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>$14000</td>
-                                <td>
-                                    <div class="text-info">Pending</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h6>60%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-info shadow-none w-100" style="height: 6px">
-                                        <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        @foreach ($product_type as $item)
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <h6>{{$item->id}}</h6>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="">
+                                            <div class="">{{$item->type}}</div>
+                                        </div>
+                                    </td>
+                                    <td>{{$item->created_at}}</td>
+                                    <td>
+                                        <div class="text-info">{{$item->updated_at}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <h6>60%</h6>
+                                        </div>
+                                        <div class="progress bg-soft-info shadow-none w-100" style="height: 6px">
+                                            <div class="progress-bar bg-info" data-toggle="progress-bar" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
                     </table>
                 </div>
             </div>

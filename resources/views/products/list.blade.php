@@ -36,6 +36,9 @@
                                 <th>Product Name</th>
                                 <th>Type</th>
                                 <th>Image</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Deleted At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -46,6 +49,9 @@
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->product_type_id}}</td>
                                     <td><img src="/storage/{{$value->image}}" alt="" width="100"></td>
+                                    <td>{{$value->created_at}}</td>
+                                    <td class="text-info">{{$value->updated_at}}</td>
+                                    <td class="text-danger">{{$value->deleted_at}}</td>
                                     <td class="d-flex">
                                         <a class="btn btn-warning me-3" href="{{route('products.edit', $value->id)}}">Edit</a>
                                         <form action="{{ route('products.destroy', $value->id) }}" method="post">

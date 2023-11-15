@@ -46,7 +46,7 @@
             <span class="item-name">Billing</span>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
             href="{{ route('special-pages.calender') }}">
             <i class="icon">
@@ -67,7 +67,7 @@
             </i>
             <span class="item-name">Calender</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false"
             aria-controls="horizontal-menu">
@@ -112,7 +112,7 @@
                                 stroke-linejoin="round"></path>
                         </svg>
                     </div>
-                    <span class="item-name">Poduct Lists</span>
+                    <span class="item-name">Product Lists</span>
                 </a>
             </li>
             <li class="nav-item ">
