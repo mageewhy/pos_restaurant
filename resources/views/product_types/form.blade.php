@@ -9,8 +9,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" href="{{route('product_types.store')}}">
+                        <form method="POST" action="{{route('product_types.store')}}">
                             @csrf
+                            @method('post')
                             <div class="form-group">
                                 <label class="form-label" for="text">Product Types</label>
                                 <input type="text" class="form-control" id="type" name="type">

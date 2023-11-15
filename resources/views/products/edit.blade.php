@@ -17,9 +17,12 @@ divdiv<x-app-layout :assets="$assets ?? []">
                                     <label class="form-label" for="validationProductName">Product Name</label>
                                     <input type="text" class="form-control" name="name" id="validationProductName" value="{{$data->name}}" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="validationType">Product Type</label>
-                                    <input type="text" name="type" value="{{$data->product_type_id}}" class="form-control" id="validationType" required>
+                                <div class="col-md-6">
+                                    <select name="product_type_id" class="form-select">
+                                        @foreach ($productType as $key => $value)
+                                            <option value="{{$key}}" @if ($data->product_type_id == $key) selected @endif>{{$value}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-12 mb-6">
                                     <label for="validationDetail" class="form-label">Detail</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductTypeController extends Controller
 {
@@ -36,9 +37,25 @@ class ProductTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        $request->validate([
+            'type' => 'required|string|max:255'
+        ]);
 
+        DB::beginTransaction();
+
+        try {
+            ProductType::create([
+                'type' => $request->type
+            ]);
+
+            DB::commit();
+            return redirect()->route('product_types.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**

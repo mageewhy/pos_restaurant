@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         $product = Product::all();
         $product_size_price = ProductSizePrice::all();
-        $productType = ProductType::all();
+        $productType = ProductType::all()->pluck('type', 'id')->toArray();
 
         return view('products.form', compact('product', 'product_size_price', 'productType'));
     }
@@ -46,7 +46,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type' => 'required',
+            'product_type_id' => 'required',
             'detail' => 'required|string',
             'image' => 'required|image',
             'product' => 'required',
@@ -64,7 +64,7 @@ class ProductController extends Controller
 
             $product = Product::create([
                 'name' => $request->name,
-                'product_type_id'=> 1,
+                'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
                 'image' => $image
             ]);
@@ -107,8 +107,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data = Product::findOrFail($id);
+        $productType = ProductType::all()->pluck('type', 'id')->toArray();
 
-        return view('products.edit', compact('data'));
+        return view('products.edit', compact(['data', 'productType']));
     }
 
     /**
@@ -122,7 +123,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type' => 'required',
+            'product_type_id' => 'required',
             'detail' => 'required|string',
             'image' => 'nullable|image',
             'product' => 'required',
@@ -142,7 +143,7 @@ class ProductController extends Controller
 
             $product->update([
                 'name' => $request->name,
-                'product_type_id'=> 1,
+                'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
                 'image' => $image
             ]);

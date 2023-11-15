@@ -19,7 +19,12 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationType">Product Type</label>
-                                    <input type="text" name="type" class="form-control" id="validationType" required>
+                                    <select name="product_type_id" class="form-select">
+                                        @dd($data->product_type_id)
+                                        @foreach ($productType as $key => $value)
+                                            <option value="{{$key}}">{{$value}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-12 mb-6">
                                     <label for="validationDetail" class="form-label">Detail</label>
