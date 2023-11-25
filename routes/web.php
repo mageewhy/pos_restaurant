@@ -2,6 +2,7 @@
 
 // Controllers
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PointShopController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
@@ -65,6 +66,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Product Module
     Route::resource('products', ProductController::class);
+
+    //Point Shops
+    Route::resource('point-shops', PointShopController::class);
+    Route::post('/member-redeem/{productId}',[PointShopController::class, 'memberRedeem'])->name('memberRedeem');
 
     //Product Module
     Route::resource('product_types', ProductTypeController::class);
