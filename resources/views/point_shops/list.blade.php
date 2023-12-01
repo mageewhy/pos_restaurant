@@ -30,15 +30,21 @@
                                 <button type="submit" class="btn btn-primary mt-3">Search</button>
                             </form>
                         </div>
-                        @if(isset($member_number))
+                    </div>
+                </div>
+            </div>
+            @if(isset($member_number))
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
                         <div class="col" data-memberid="{{$member_number->id}}">
                             <h1>{{$member_number->phone_number}}</h1>
                             <h3>Point Available: {{$member_number->point}} points</h3>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <div class="header-title">
@@ -57,7 +63,7 @@
                                     <form action="{{route('memberRedeem', $item->id)}}" method="post">
                                         @csrf
                                         @method('post')
-                                        <input type="text" name="member" class="d-none" value="{{$member_number->id ? $member_number->id : 0}}">
+                                        <input type="text" name="member" class="d-none" value="{{$member_number ? $member_number->id : 0}}">
                                         <div class="d-flex justify-content-between">
                                             <button type="submit"
                                             @if(isset($member_number))
