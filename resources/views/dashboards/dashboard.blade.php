@@ -223,12 +223,14 @@
                <div class="card overflow-hidden" data-aos="fade-up" data-aos-delay="400">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
-                        <h4 class="card-title mb-2">Enterprise Clients</h4>
+                        <h4 class="card-title mb-2">Daily Receipts</h4>
                         <p class="mb-0">
                            <svg class ="me-2" width="24" height="24" viewBox="0 0 24 24">
                               <path fill="#3a57e8" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
                            </svg>
-                           15 new acquired this month
+                           @foreach ($invoices as $item)
+                              {{$item->count()}}
+                           @endforeach
                         </p>
                      </div>
                      <div class="dropdown">
@@ -246,154 +248,21 @@
                         <table id="basic-table" class="table table-striped mb-0" role="grid">
                            <thead>
                               <tr>
-                                 <th>COMPANIES</th>
-                                 <th>CONTACTS</th>
-                                 <th>ORDER</th>
-                                 <th>COMPLETION</th>
+                                 <th>Invoice No.</th>
+                                 <th>Products</th>
+                                 <th>Price</th>
+                                 <th>Customer ID</th>
+                                 <th>Date</th>
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <td>
-                                    <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/01.png')}}" alt="profile">
-                                       <h6>Addidis Sportwear</h6>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                       </a>
-                                    </div>
-                                 </td>
-                                 <td>$14,000</td>
-                                 <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                       <h6>60%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-primary shadow-none w-100" style="height: 4px">
-                                       <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/05.png')}}" alt="profile">
-                                       <h6>Netflixer Platforms</h6>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                       </a>
-                                    </div>
-                                 </td>
-                                 <td>$30,000</td>
-                                 <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                       <h6>25%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-primary shadow-none w-100" style="height: 4px">
-                                       <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/02.png')}}" alt="profile">
-                                       <h6>Shopifi Stores</h6>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                                       </a>
-                                    </div>
-                                 </td>
-                                 <td>$8,500</td>
-                                 <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                       <h6>100%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-success shadow-none w-100" style="height: 4px">
-                                       <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/03.png')}}" alt="profile">
-                                       <h6>Bootstrap Technologies</h6>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                       </a>
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                                       </a>
-                                    </div>
-                                 </td>
-                                 <td>$20,500</td>
-                                 <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                       <h6>100%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-success shadow-none w-100" style="height: 4px">
-                                       <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/04.png')}}" alt="profile">
-                                       <h6>Community First</h6>
-                                    </div>
-                                 </td>
-                                 <td>
-                                    <div class="iq-media-group iq-media-group-1">
-                                       <a href="#" class="iq-media-1">
-                                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                       </a>
-                                    </div>
-                                 </td>
-                                 <td>$9,800</td>
-                                 <td>
-                                    <div class="d-flex align-items-center mb-2">
-                                       <h6>100%</h6>
-                                    </div>
-                                    <div class="progress bg-soft-success shadow-none w-100" style="height: 4px">
-                                       <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </td>
-                              </tr>
+                              @foreach ($invoices as $item)
+                                 <tr>{{$item->invoice_id }}</tr>
+                                 <tr>{{$item->product->name}}</tr>
+                                 <tr>${{$item->product->productSizePrice->price}} </tr>
+                                 <tr class="text-primary">{{$item->customer->customer_id}} </tr>
+                                 <tr class="text-info">{{ $item->created_at}}</tr>
+                              @endforeach
                            </tbody>
                         </table>
                      </div>

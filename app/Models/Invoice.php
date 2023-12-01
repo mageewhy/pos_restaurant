@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MemberPoint extends Model
+class Invoice extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'phone_number',
-        'point',
+        'invoice_number',
+        'quantity',
     ];
 
-    public function invoice(){
-        $this->hasMany(Invoice::class);
+    public function member(){
+        $this->hasOne(MemberPoint::class, 'member_point_id');
     }
 }
