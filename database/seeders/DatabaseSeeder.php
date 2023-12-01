@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            LaratrustSeeder::class, 
             PermissionTableSeeder::class,
             RoleTableSeeder::class,
             UserTableSeeder::class,
@@ -23,5 +24,9 @@ class DatabaseSeeder extends Seeder
             $user->assignRole('user');
         });
         \App\Models\UserProfile::factory(43)->create();
+
+
+        $this->call(ProductSeeder::class);
+        $this->call(UserSeeder::class);
     }
-}
+    }

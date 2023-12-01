@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PagesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +63,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/pages', [PagesController::class, 'index'])->name('pages');
+    // Product Routes
+    
+
+    // Route::get('/pages', 'PagesController@pages')->name('pages');
+    // Route::get('/pages', [PagesController::class, 'pages'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/products', [ProductController::class, 'index']);
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // Users Module
     Route::resource('users', UserController::class);
@@ -138,3 +153,16 @@ Route::group(['prefix' => 'icons'], function() {
 //Extra Page Routs
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('pages', [PagesController::class, 'index'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/products', [ProductController::class, 'index']);
+});
+
+
+// Route::(get(/page), function(){
+//     return view('page')
+// });

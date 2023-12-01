@@ -14,6 +14,9 @@ class HomeController extends Controller
         $assets = ['chart', 'animation'];
         return view('dashboards.dashboard', compact('assets'));
     }
+    
+   
+
 
     /*
      * Menu Style Routs
