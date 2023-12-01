@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string("name");
             $table->foreignIdFor(ProductType::class);
             $table->string("detail");
-            $table->foreignIdFor(ProductSizePrice::class);
             $table->string("image");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
