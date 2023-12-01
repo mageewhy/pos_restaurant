@@ -13,7 +13,7 @@
 
 <body class="boxed">
     @include('partials.dashboard._body5')
-    <a class="btn btn-fixed-end btn-secondary btn-icon btn-dashboard" href="../landing-pages/index">Landing Pages</a>
+    {{-- <a class="btn btn-fixed-end btn-secondary btn-icon btn-dashboard" href="../landing-pages/index">Landing Pages</a> --}}
 </body>
 
 </html>
