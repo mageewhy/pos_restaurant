@@ -91,7 +91,7 @@
         </a>
         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar">
             <li class=" nav-item ">
-                <a class="nav-link {{ activeRoute(route('products.index')) }}" href="{{ route('products.index') }}">
+                <a class="nav-link {{ activeRoute(route('products.list')) }}" href="{{ route('products.list') }}">
                     <div id="svg-container-35">
                         <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
