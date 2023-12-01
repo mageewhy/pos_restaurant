@@ -13,14 +13,10 @@ use App\Http\Controllers\ProductTypeController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< Updated upstream
-=======
 
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PagesController;
 
->>>>>>> Stashed changes
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -159,9 +155,6 @@ Route::group(['middleware' => 'auth'], function () {
 //Extra Page Routs
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
-<<<<<<< Updated upstream
-=======
-
 
 
 Route::middleware(['auth'])->group(function () {
@@ -173,4 +166,3 @@ Route::middleware(['auth'])->group(function () {
 // Route::(get(/page), function(){
 //     return view('page')
 // });
->>>>>>> Stashed changes
