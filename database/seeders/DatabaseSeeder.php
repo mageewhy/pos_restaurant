@@ -17,9 +17,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             PermissionTableSeeder::class,
             RoleTableSeeder::class,
             UserTableSeeder::class,
+=======
+            // DatabaseSeeder::class,
+            ProductSeeder::class,
+>>>>>>> Stashed changes
 =======
             // DatabaseSeeder::class,
             ProductSeeder::class,
