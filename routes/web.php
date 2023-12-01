@@ -171,7 +171,6 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 Route::middleware(['auth'])->group(function () {
     Route::get('pages', [PagesController::class, 'index'])->name('pages');
     Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
-    Route::get('/products', [ProductController::class, 'index']);
 });
 
 
