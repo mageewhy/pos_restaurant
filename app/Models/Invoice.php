@@ -15,6 +15,10 @@ class Invoice extends Model
     ];
 
     public function member(){
-        $this->hasOne(MemberPoint::class, 'member_point_id');
+        return $this->belongsTo(MemberPoint::class);
+    }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
     }
 }

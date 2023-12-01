@@ -14,4 +14,8 @@ class ProductSizePrice extends Model
         "size",
         "price",
     ];
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

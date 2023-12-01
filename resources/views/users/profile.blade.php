@@ -31,9 +31,15 @@
          </div>
          <div class="card-body">
             {{-- <p>Lorem ipsum dolor sit amet, contur adipiscing elit.</p> --}}
-            <div class="mb-1">Company Name: <span class="ms-3 text-primary">{{auth()->user()->userProfile->company_name}}</span></div>
+            <div class="mb-1">Company Name:
+                @if(auth()->user()->userProfile == NULL)
+                  <span class="ms-3 text-danger">No Company Name</span>
+                @else
+                    <span class="ms-3 text-primary">{{auth()->user()->userProfile->company_name}}</span>
+                @endif
+            </div>
             <div class="mb-1">Email: <span class="ms-3 text-primary">{{auth()->user()->email}}</span></div>
-            <div class="mb-1">Phone: 
+            <div class="mb-1">Phone:
                @if (auth()->user()->phone_number == NULL)
                   <span class="ms-3 text-primary">{{auth()->user()->userProfile->phone_number}}</span>
                @else

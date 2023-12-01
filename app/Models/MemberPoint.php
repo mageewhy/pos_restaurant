@@ -15,6 +15,6 @@ class MemberPoint extends Model
     ];
 
     public function invoice(){
-        $this->hasMany(Invoice::class);
+        return $this->hasMany(Invoice::class);
     }
 }
