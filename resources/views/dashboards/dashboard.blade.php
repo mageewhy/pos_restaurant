@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Total Sales</p>
-                                            <h4 class="counter" style="visibility: visible;">$560K</h4>
+                                            <h4 class="counter" style="visibility: visible;">${{$sum_total}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Total Profit</p>
-                                            <h4 class="counter">$185K</h4>
+                                            <h4 class="counter text-danger">N/A</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Members</p>
-                                            <h4 class="counter">11.2M</h4>
+                                            <h4 class="counter">{{$member->count()}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Revenue</p>
-                                            <h4 class="counter">$742K</h4>
+                                            <h4 class="counter text-danger">N/A</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Net Income</p>
-                                            <h4 class="counter">$150K</h4>
+                                            <h4 class="counter text-danger">N/A</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="progress-detail">
                                             <p class="mb-2">Today</p>
-                                            <h4 class="counter">$4600</h4>
+                                            <h4 class="counter">${{$sum_today}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -127,11 +127,13 @@
         </div>
         <div class="col-md-12 col-lg-12">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-lg-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="800">
                         <div class="card-header d-flex justify-content-between flex-wrap">
                             <div class="header-title">
-                                <h4 class="card-title">$855.8K</h4>
+                                <h4 class="card-title">
+                                    ${{ $sum_usd }} | ៛{{ $sum_khr }}
+                                </h4>
                                 <p class="mb-0">Gross Sales</p>
                             </div>
                             <div class="d-flex align-items-center align-self-center">
@@ -144,7 +146,7 @@
                                         </g>
                                     </svg>
                                     <div class="ms-2">
-                                        <span class="text-gray">Sales</span>
+                                        <span class="text-gray">Sales USD</span>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center ms-3 text-info">
@@ -156,100 +158,22 @@
                                         </g>
                                     </svg>
                                     <div class="ms-2">
-                                        <span class="text-gray">Cost</span>
+                                        <span class="text-gray">Sales KHR</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
+                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">{{ $selectedDate }}</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a href="{{ route('dashboard', ['date' => 'today']) }}" class="dropdown-item" id="today">Today</a></li>
+                                    <li><a href="{{ route('dashboard', ['date' => 'this_week']) }}" class="dropdown-item" id="this_week">This Week</a></li>
+                                    <li><a href="{{ route('dashboard', ['date' => 'this_month']) }}" class="dropdown-item" id="this_month">This Month</a></li>
+                                    <li><a href="{{ route('dashboard', ['date' => 'this_year']) }}" class="dropdown-item" id="this_year">This Year</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-body">
                             <div id="d-main" class="d-main"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6">
-                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title">Earnings</h4>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
-                                <div class="d-grid gap col-md-4 col-lg-4">
-                                    <div class="d-flex align-items-start">
-                                        <svg class="mt-2" xmlns="http://www.w3.org/2000/svg" width="14"
-                                            viewBox="0 0 24 24" fill="#3a57e8">
-                                            <g id="Solid dot">
-                                                <circle id="Ellipse 67" cx="12" cy="12" r="8"
-                                                    fill="#3a57e8"></circle>
-                                            </g>
-                                        </svg>
-                                        <div class="ms-3">
-                                            <span class="text-gray">Fashion</span>
-                                            <h6>251K</h6>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-start">
-                                        <svg class="mt-2" xmlns="http://www.w3.org/2000/svg" width="14"
-                                            viewBox="0 0 24 24" fill="#4bc7d2">
-                                            <g id="Solid dot1">
-                                                <circle id="Ellipse 68" cx="12" cy="12" r="8"
-                                                    fill="#4bc7d2"></circle>
-                                            </g>
-                                        </svg>
-                                        <div class="ms-3">
-                                            <span class="text-gray">Accessories</span>
-                                            <h6>176K</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6">
-                    <div class="card" data-aos="fade-up" data-aos-delay="1200">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title">Conversions</h4>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton3"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div id="d-activity" class="d-activity"></div>
                         </div>
                     </div>
                 </div>
@@ -263,9 +187,9 @@
                                         <path fill="#3a57e8"
                                             d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
                                     </svg>
-                                    @foreach ($invoices as $item)
-                                        {{ $item->count() }}
-                                    @endforeach
+
+                                    {{ $invoices->count() }}
+
                                 </p>
                             </div>
                             <div class="dropdown">
@@ -287,19 +211,25 @@
                                             <th>Invoice No.</th>
                                             <th>Products</th>
                                             <th>Price</th>
+                                            <th>QTY</th>
+                                            <th>Total (10% VAT)</th>
                                             <th>Member No.</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($invoices as $item)
-                                            <td>{{ $item->invoice_number }}</td>
-                                            <td>{{ $item->product->name }}</td>
-                                            @foreach ($item->product->productSizePrice as $item_price)
-                                                <td>${{ $item_price->price }} </td>
-                                            @endforeach
-                                            <td class="text-primary"></td>
-                                            <td class="text-info">{{ $item->created_at }}</td>
+                                            <tr>
+                                                <td>{{ $item->invoice_number }}</td>
+                                                <td>{{ $item->product->name }}</td>
+                                                @foreach ($item->product->productSizePrice as $item_price)
+                                                    <td>${{ $item_price->price }} </td>
+                                                @endforeach
+                                                <td>{{ $item->quantity }}</td>
+                                                <td>${{ $item->grand_total_usd }}</td>
+                                                <td class="text-primary"></td>
+                                                <td class="text-info">{{ $item->created_at }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -311,3 +241,125 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    var chartData = @json($chartData);
+
+    if (document.querySelectorAll('#d-main').length) {
+        console.log(chartData);
+        const options = {
+            series: [{
+                name: 'sales_usd',
+                data: chartData.sales_usd,
+            }, {
+                name: 'sales_khr',
+                data: chartData.sales_khr,
+            }],
+            chart: {
+                fontFamily: '"Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                height: 245,
+                type: 'area',
+                toolbar: {
+                    show: false
+                },
+                sparkline: {
+                    enabled: false,
+                },
+            },
+            colors: ["#3a57e8", "#4bc7d2"],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 3,
+            },
+            yaxis: {
+                show: true,
+                labels: {
+                    show: true,
+                    minWidth: 19,
+                    maxWidth: 19,
+                    style: {
+                        colors: "#8A92A6",
+                    },
+                    offsetX: -5,
+                },
+            },
+            legend: {
+                show: false,
+            },
+            xaxis: {
+                labels: {
+                    minHeight: 22,
+                    maxHeight: 22,
+                    show: true,
+                    style: {
+                        colors: "#8A92A6",
+                    },
+                },
+                lines: {
+                    show: false //or just here to disable only x axis grids
+                },
+                categories: chartData.date
+            },
+            grid: {
+                show: false,
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: "vertical",
+                    shadeIntensity: 0,
+                    gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                    inverseColors: true,
+                    opacityFrom: .4,
+                    opacityTo: .1,
+                    stops: [0, 50, 80],
+                    colors: ["#3a57e8", "#4bc7d2"]
+                }
+            },
+            tooltip: {
+                enabled: true,
+            },
+        };
+
+        const chart = new ApexCharts(document.querySelector("#d-main"), options);
+        chart.render();
+        document.addEventListener('ColorChange', (e) => {
+            console.log(e)
+            const newOpt = {
+                colors: [e.detail.detail1, e.detail.detail2],
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'dark',
+                        type: "vertical",
+                        shadeIntensity: 0,
+                        gradientToColors: [e.detail.detail1, e.detail
+                            .detail2
+                        ], // optional, if not defined - uses the shades of same color in series
+                        inverseColors: true,
+                        opacityFrom: .4,
+                        opacityTo: .1,
+                        stops: [0, 50, 60],
+                        colors: [e.detail.detail1, e.detail.detail2],
+                    }
+                },
+            }
+            chart.updateOptions(newOpt)
+        })
+    }
+
+
+    // Update the displayed text when a dropdown item is clicked
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function() {
+            dropdownToggle.textContent = this.textContent;
+        });
+    });
+</script>

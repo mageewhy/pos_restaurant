@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                             <div class="form-group">
                                 <label class="form-label">User Role: <span class="text-danger">*</span></label>
                                 {{ Form::select('user_role', $roles, old('user_role') ? old('user_role') : $data->user_type ?? 'user', ['class' => 'form-control', 'placeholder' => 'Select User Role']) }}
@@ -141,7 +141,7 @@
                                     {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter e-mail', 'required']) }}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="form-label" for="pno">Pin Code:</label>
+                                    <label class="form-label" for="pno">Postal Code:</label>
                                     {{ Form::number('userProfile[pin_code]', old('userProfile[pin_code]'), ['class' => 'form-control', 'id' => 'pin_code', 'step' => 'any']) }}
                                 </div>
                                 <div class="form-group col-md-12">

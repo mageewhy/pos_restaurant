@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\MemberPoint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,24 +14,78 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $invoice_all = Invoice::all();
         $invoices = Invoice::latest()->paginate(10);
-        $invoice_sales = Invoice::all();
+        $member = MemberPoint::all();
+
+        $dateRange = $request->input('date');
+
+        // Perform the query based on the selected date range
+        switch ($dateRange) {
+            case 'today':
+                $selectedDate = 'Today';
+                $startDate = Carbon::today()->startOfDay();
+                $endDate = Carbon::today()->endOfDay();
+                break;
+            case 'this_week':
+                $selectedDate = 'This Week';
+                $startDate = Carbon::now()->startOfWeek();
+                $endDate = Carbon::now()->endOfWeek();
+                break;
+            case 'this_month':
+                $selectedDate = 'This Month';
+                $startDate = Carbon::now()->startOfMonth();
+                $endDate = Carbon::now()->endOfMonth();
+                break;
+            case 'this_year':
+                $selectedDate = 'This Year';
+                $startDate = Carbon::now()->startOfYear();
+                $endDate = Carbon::now()->endOfYear();
+                break;
+            default:
+                $selectedDate = 'Today';
+                $startDate = Carbon::today()->startOfDay();
+                $endDate = Carbon::today()->endOfDay();
+                break;
+        }
+
+        $invoice_sales = Invoice::whereBetween('created_at', [$startDate, $endDate])->get();
+        $sales_today = Invoice::whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])->get();
+        $sum_today = 0;
+        $sum_total = 0;
+
+        foreach($sales_today as $sale_tday){
+            $sum_today += $sale_tday->grand_total_usd;
+        };
+
+        foreach($invoice_all as $sale_total){
+            $sum_total += $sale_total->grand_total_usd;
+        };
 
         $sales_usd = [];
         $sales_khr = [];
+        $formattedDates = [];
 
         foreach ($invoice_sales as $invoice) {
             $sales_usd[] = $invoice->grand_total_usd;
             $sales_khr[] = $invoice->grand_total_khr;
+            $formattedDate = Carbon::parse($invoice->created_at)->format('d/m/Y');
+            $formattedDates[] = $formattedDate;
         }
+
         $chartData = [
             'sales_usd' => $sales_usd,
             'sales_khr' => $sales_khr,
+            'date' => $formattedDates,
         ];
+
+        $sum_usd = array_sum($sales_usd);
+        $sum_khr = array_sum($sales_khr);
 
         // dd($chartData);
         $assets = ['animation'];
-        return view('dashboards.dashboard', compact('assets', 'invoices'))->with('chartData', $chartData);
+        return view('dashboards.dashboard',
+        compact('assets', 'invoices', 'chartData', 'sum_khr', 'sum_usd', 'selectedDate', 'sum_today', 'sum_total', 'member'));
     }
 
     /*

@@ -98,8 +98,10 @@ class ProductTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
+        ProductType::find($id)->delete();
 
+        return redirect()->route('product_types.index');
     }
 }

@@ -3,7 +3,7 @@
 @if(in_array('data-table',$assets ?? []))
 <script src="{{ asset('vendor/datatables/buttons.server-side.js')}}"></script>
 @endif
-@if(in_array('chart',$assets ?? []))
+@if($assets ?? [])
     <!-- apexchart JavaScript -->
     <script src="{{asset('js/charts/apexcharts.js') }}"></script>
     <!-- widgetchart JavaScript -->

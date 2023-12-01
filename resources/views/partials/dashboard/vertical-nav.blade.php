@@ -1,10 +1,12 @@
 <ul class="navbar-nav iq-main-menu" id="sidebar">
+
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Home</span>
             <span class="mini-icon">Home</span>
         </a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link {{ activeRoute(route('dashboard')) }}" aria-current="page" href="{{ route('dashboard') }}">
             <i class="icon">
@@ -24,12 +26,14 @@
     <li>
         <hr class="hr-horizontal">
     </li>
+
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Pages</span>
             <span class="mini-icon">Pages</span>
         </a>
     </li>
+
     <li class=" nav-item">
         <a class="nav-link {{ activeRoute(route('special-pages.billing')) }}"
             href="{{ route('special-pages.billing') }}">
@@ -46,6 +50,7 @@
             <span class="item-name">Billing</span>
         </a>
     </li>
+
     {{-- <li class="nav-item">
         <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
             href="{{ route('special-pages.calender') }}">
@@ -68,6 +73,7 @@
             <span class="item-name">Calender</span>
         </a>
     </li> --}}
+
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false"
             aria-controls="horizontal-menu">
@@ -143,6 +149,7 @@
             </li>
         </ul>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#point-horizontal-menu" role="button" aria-expanded="false"
             aria-controls="horizontal-menu">
@@ -218,6 +225,7 @@
             </li>
         </ul>
     </li>
+
     <li class="nav-item">
         <a class="nav-link {{ activeRoute(route('users.show', 1)) }}" href="{{ route('users.show', 1) }}">
             <i class="icon">
@@ -233,6 +241,7 @@
             <span class="item-name">User Profile</span>
         </a>
     </li>
+
     @if(auth()->user()->can('permission'))
         <li>
             <hr class="hr-horizontal">
