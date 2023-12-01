@@ -14,8 +14,8 @@
                         <img src="{{asset('images/avatars/avtar_3.png')}}" alt="User-Profile" class="theme-color-pink-img img-fluid rounded-pill avatar-100">
                      </div>
                      <div class="d-flex flex-wrap align-items-center mb-3 mb-sm-0">
-                        <h4 class="me-2 h4">{{ $data->full_name ?? 'Austin Robertson'  }}</h4>
-                        <span class="text-capitalize"> - {{ str_replace('_',' ',auth()->user()->user_type) ?? 'Marketing Administrator' }}</span>
+                        <h4 class="me-2 h4">{{ auth()->user()->full_name }}</h4>
+                        <span class="text-capitalize"> - {{ str_replace('_',' ',auth()->user()->user_type)}}</span>
                      </div>
                   </div>
                </div>
@@ -30,10 +30,27 @@
             </div>
          </div>
          <div class="card-body">
-            <p>Lorem ipsum dolor sit amet, contur adipiscing elit.</p>
-            <div class="mb-1">Email: <a href="#" class="ms-3">nikjone@demoo.com</a></div>
-            <div class="mb-1">Phone: <a href="#" class="ms-3">001 2351 256 12</a></div>
-            <div>Location: <span class="ms-3">USA</span></div>
+            {{-- <p>Lorem ipsum dolor sit amet, contur adipiscing elit.</p> --}}
+            <div class="mb-1">Company Name: <span class="ms-3 text-primary">{{auth()->user()->userProfile->company_name}}</span></div>
+            <div class="mb-1">Email: <span class="ms-3 text-primary">{{auth()->user()->email}}</span></div>
+            <div class="mb-1">Phone: 
+               @if (auth()->user()->phone_number == NULL)
+                  <span class="ms-3 text-primary">{{auth()->user()->userProfile->phone_number}}</span>
+               @else
+                  <span class="ms-3 text-primary">{{auth()->user()->phone_number}}</span>
+               @endif
+            </div>
+            <div>Address:
+               @if (auth()->user()->userProfile == NULL)
+                  <span class="ms-3 text-danger">No Address Added</span>
+               @else
+                  <span class="ms-3">{{auth()->user()->userProfile->street_addr_1}}</span>
+               @endif
+            </div>
+
+            <div class="mt-4">
+               <a href="{{route('users.edit', auth()->user()->id)}}" class="btn btn-info">Edit Profile</a>
+            </div>
          </div>
          </div>
       </div>

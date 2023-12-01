@@ -4,7 +4,7 @@
          <div class="row row-cols-1">
             <div class="d-slider1 overflow-hidden ">
                <ul  class="col-lg-12 list-inline m-0 p-0 mb-2">
-                  <div class="col-lg-12 d-flex mx-3">
+                  <div class="col-lg-12 d-flex">
                      <li class="card card-slide col-lg-4" data-aos="fade-up" data-aos-delay="700">
                         <div class="card-body">
                            <div class="progress-widget">
@@ -35,24 +35,23 @@
                            </div>
                         </div>
                      </li>
-                     <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="900">
+                     <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1300">
                         <div class="card-body">
                            <div class="progress-widget">
-                              <div id="circle-progress-03" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                              <div id="circle-progress-07" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="30" data-type="percent">
                                  <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
                                  </svg>
                               </div>
                               <div class="progress-detail">
-                                 <p  class="mb-2">Total Cost</p>
-                                 <h4 class="counter">$375K</h4>
+                                 <p  class="mb-2">Members</p>
+                                 <h4 class="counter">11.2M</h4>
                               </div>
                            </div>
                         </div>
-                     </li>
-
+                     </li>                 
                   </div>
-                  <div class="col-lg-12 d-flex mx-3">
+                  <div class="col-lg-12 d-flex">
                      <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1000">
                         <div class="card-body">
                            <div class="progress-widget">
@@ -99,21 +98,6 @@
                         </div>
                      </li>
                   </div>
-                  <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1300">
-                     <div class="card-body">
-                        <div class="progress-widget">
-                           <div id="circle-progress-07" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="30" data-type="percent">
-                              <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
-                                 <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                              </svg>
-                           </div>
-                           <div class="progress-detail">
-                              <p  class="mb-2">Members</p>
-                              <h4 class="counter">11.2M</h4>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
                </ul>
             </div>
          </div>

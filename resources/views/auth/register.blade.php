@@ -65,13 +65,13 @@
                               </div>
                               <div class="d-flex justify-content-center">
                                  <div class="form-check mb-3">
-                                    <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
+                                    <label class="form-check-label" for="customCheck1">I agree with the Terms of Use</label>
                                     <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                                  </div>
                               </div>
                            </div>
                            <div class="d-flex justify-content-center">
-                              <button type="submit" class="btn btn-primary"> {{ __('sign up') }}</button>
+                              <button type="submit" class="btn btn-primary"> {{ __('Sign up') }}</button>
                            </div>
                            <p class="mt-3 text-center">
                               Already have an Account  <a href="{{route('auth.signin')}}" class="text-underline">Sign In</a>

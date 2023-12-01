@@ -43,7 +43,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('images/Flag/flag001.png') }}" class="img-fluid rounded-circle"
@@ -78,8 +78,8 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
+                </li> --}}
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link" id="notification-drop" data-bs-toggle="dropdown">
                         <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -241,7 +241,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -266,9 +266,9 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('users.show', auth()->id() || 1) }}">Profile</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('auth.userprivacysetting') }}">Privacy
+                        {{-- <li><a class="dropdown-item" href="{{ route('auth.userprivacysetting') }}">Privacy
                                 Setting</a></li>
-                        <li>
+                        <li> --}}
                             <hr class="dropdown-divider">
                         </li>
                         <li>

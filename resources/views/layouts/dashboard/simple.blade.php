@@ -26,7 +26,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-WNGH9RL');
         window.tag_manager_event = 'dashboard-free-preview';
-        window.tag_manager_product = 'HopeUI-laravel';
+        window.tag_manager_product = 'POSTAURANT';
     </script>
     <!-- End Google Tag Manager -->
     @include('partials.dashboard._head')

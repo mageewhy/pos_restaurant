@@ -50,9 +50,9 @@
                            <div class="d-flex justify-content-center">
                               <button type="submit" class="btn btn-primary">{{ __('Sign In') }}</button>
                            </div>
-                           <p class="mt-3 text-center">
+                           {{-- <p class="mt-3 text-center">
                               Don’t have an account? <a href="{{route('auth.signup')}}" class="text-underline">Click here to sign up.</a>
-                           </p>
+                           </p> --}}
                         </form>
                      </div>
                   </div>
