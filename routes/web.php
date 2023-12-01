@@ -13,6 +13,14 @@ use App\Http\Controllers\ProductTypeController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
+<<<<<<< Updated upstream
+=======
+
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PagesController;
+
+>>>>>>> Stashed changes
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('vector', [HomeController::class, 'vector'])->name('maps.vector');
     });
 
-    //Auth pages Routs
+    //Auth pages Routes
     Route::group(['prefix' => 'auth'], function() {
         Route::get('signin', [HomeController::class, 'signin'])->name('auth.signin');
         Route::get('signup', [HomeController::class, 'signup'])->name('auth.signup');
@@ -151,3 +159,18 @@ Route::group(['middleware' => 'auth'], function () {
 //Extra Page Routs
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
 Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+<<<<<<< Updated upstream
+=======
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('pages', [PagesController::class, 'index'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');  
+});
+
+
+// Route::(get(/page), function(){
+//     return view('page')
+// });
+>>>>>>> Stashed changes

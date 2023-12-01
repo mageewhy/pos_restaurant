@@ -22,4 +22,8 @@ class Product extends Model
     {
         return $this->hasMany(ProductSizePrice::class);
     }
+
+    public function productType(){
+        return $this->belongsTo(ProductType::class);
+    }
 }
