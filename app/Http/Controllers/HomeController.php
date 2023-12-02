@@ -15,7 +15,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $invoice_all = Invoice::all();
-        $invoices = Invoice::latest()->paginate(10);
+        $invoices_daily = Invoice::whereBetween(
+            'created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()]
+            )->latest()->paginate(10);
+
+        $todayDate = Carbon::today()->format('F j, Y');
+
         $member = MemberPoint::all();
 
         $dateRange = $request->input('date');
@@ -69,7 +74,7 @@ class HomeController extends Controller
         foreach ($invoice_sales as $invoice) {
             $sales_usd[] = $invoice->grand_total_usd;
             $sales_khr[] = $invoice->grand_total_khr;
-            $formattedDate = Carbon::parse($invoice->created_at)->format('d/m/Y');
+            $formattedDate = Carbon::parse($invoice->created_at)->format('M j, Y');
             $formattedDates[] = $formattedDate;
         }
 
@@ -85,7 +90,18 @@ class HomeController extends Controller
         // dd($chartData);
         $assets = ['animation'];
         return view('dashboards.dashboard',
-        compact('assets', 'invoices', 'chartData', 'sum_khr', 'sum_usd', 'selectedDate', 'sum_today', 'sum_total', 'member'));
+        compact(
+            'assets',
+            'invoices_daily',
+            'chartData',
+            'sum_khr',
+            'sum_usd',
+            'selectedDate',
+            'sum_today',
+            'sum_total',
+            'member',
+            'todayDate'
+            ));
     }
 
     /*

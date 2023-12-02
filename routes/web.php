@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Product Module
     Route::resource('products', ProductController::class);
 
+    Route::resource('invoices', InvoiceController::class);
+
     //Point Shops
     Route::resource('point-shops', PointShopController::class);
     Route::post('/member-redeem/{productId}',[PointShopController::class, 'memberRedeem'])->name('memberRedeem');
@@ -120,7 +122,7 @@ Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.t
 
 Route::middleware(['auth'])->group(function () {
     Route::get('pages', [PagesController::class, 'index'])->name('pages');
-    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');  
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
 });
 
 
