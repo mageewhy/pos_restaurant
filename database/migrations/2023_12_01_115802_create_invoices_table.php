@@ -18,8 +18,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number');
-            $table->foreignIdFor(Product::class);
-            $table->integer('quantity');
+            $table->json('product');
             $table->float('sub_total');
             $table->float('vat');
             $table->float('grand_total_usd');

@@ -11,11 +11,16 @@ class Invoice extends Model
 
     protected $fillable = [
         'invoice_number',
-        'quantity',
+        'product',
+        'sub_total',
+        'vat',
+        'grand_total_usd',
+        'grand_total_khr',
+        'member_point_id'
     ];
 
     public function member(){
-        return $this->belongsTo(MemberPoint::class);
+        return $this->belongsTo(MemberPoint::class, 'member_point_id');
     }
 
     public function product(){

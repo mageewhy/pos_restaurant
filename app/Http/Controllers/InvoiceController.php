@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\MemberPoint;
 use App\Models\ProductSizePrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,32 +42,41 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'name' => 'required|string|max:255',
-            'product_type_id' => 'required',
-            'detail' => 'required|string',
-            'image' => 'required|image',
-            'product' => 'required',
-            'product.*.size' => 'required',
-            'product.*.price' => 'required',
+            'quantity' => 'array',
+            'productSizePriceId' => 'array',
+            'phoneNumber' => 'nullable',
+            'sub_total' => 'required',
+            'grand_total_usd' => 'required',
+            'grand_total_khr' => 'required',
+            'vat' => 'nullable'
         ]);
 
         DB::beginTransaction();
 
         try {
+            $member = MemberPoint::where('phone_number', $request->phoneNumber)->firstOrCreate();
+            $product = [];
 
-            $product = Invoice::create([
-                'name' => $request->name,
-                'product_type_id'=> $request->product_type_id,
-                'detail'=> $request->detail,
+            foreach ($request->productSizePriceId as $key => $value) {
+                $product[$key]['productSizePriceId'] = $value;
+                $product[$key]['quantity'] = $request->quantity[$key];
+            }
+
+            Invoice::create([
+                'invoice_number' => 'INV' . time(),
+                'product' => json_encode($product),
+                'sub_total' => $request->total,
+                'vat' => $request->vat,
+                'grand_total_usd' => $request->grand_total_usd,
+                'grand_total_khr' => $request->grand_total_khr,
+                'member_point_id' => $member->id,
             ]);
 
-            foreach ($request->product as $key => $value) {
-                $product->productSizePrice()->create([
-                    'size' => $value['size'],
-                    'price' => $value['price'],
-                ]);
-            }
+            $member->update([
+                'point' => $member->point + $request->grand_total_usd * 10
+            ]);
 
             DB::commit();
             return redirect()->route('products.index');

@@ -8,13 +8,15 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 // Packages
 use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\PagesController;
 
 /*
@@ -46,6 +48,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/pages', [PagesController::class, 'index'])->name('pages');
+    // Product Routes
+
+
+    // Route::get('/pages', 'PagesController@pages')->name('pages');
+    // Route::get('/pages', [PagesController::class, 'pages'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/products', [ProductController::class, 'index']);
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // Users Module
     Route::resource('users', UserController::class);
@@ -61,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Product Module
     Route::resource('product_types', ProductTypeController::class);
+
+    Route::resource('billing', BillingController::class);
 
     //App Details Page => 'Dashboard'], function() {
     Route::group(['prefix' => 'menu-style'], function() {

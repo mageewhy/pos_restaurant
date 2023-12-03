@@ -301,9 +301,7 @@
                                     <thead>
                                         <tr>
                                             <th>Invoice No.</th>
-                                            <th>Products</th>
                                             <th>Price</th>
-                                            <th>QTY</th>
                                             <th>Total (10% VAT)</th>
                                             <th>Member No.</th>
                                             <th>Date</th>
@@ -313,13 +311,9 @@
                                         @foreach ($invoices_daily as $item)
                                             <tr>
                                                 <td>{{ $item->invoice_number }}</td>
-                                                <td>{{ $item->product->name }}</td>
-                                                @foreach ($item->product->productSizePrice as $item_price)
-                                                    <td>${{ $item_price->price }} </td>
-                                                @endforeach
-                                                <td>{{ $item->quantity }}</td>
                                                 <td>${{ $item->grand_total_usd }}</td>
-                                                <td class="text-primary"></td>
+                                                <td>{{ $item->vat }}</td>
+                                                <td>{{ $item->member ? $item->member->phone_number : '' }}</td>
                                                 <td class="text-info">{{ $item->created_at }}</td>
                                             </tr>
                                         @endforeach
