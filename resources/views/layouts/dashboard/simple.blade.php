@@ -33,7 +33,13 @@
 </head>
 
 <body class data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
-    @include('partials.dashboard._body7')
+
+    @if (auth()->guest())
+        @include('partials.dashboard._body7')
+    @else
+        @include('partials.dashboard._body_header')
+        @include('partials.dashboard._body7')
+    @endif
 </body>
 
 </html>

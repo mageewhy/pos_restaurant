@@ -22,6 +22,7 @@
                                     <label class="form-label" for="validationType">Product Type</label>
                                     <select name="product_type_id" class="form-select">
                                         {{-- @dd($data->product_type_id) --}}
+                                        <option selected disabled>Select Product Type</option>
                                         @foreach ($productType as $key => $value)
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach

@@ -19,11 +19,11 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->string('invoice_number');
             $table->json('product');
-            $table->float('sub_total');
-            $table->float('vat');
-            $table->float('grand_total_usd');
-            $table->float('grand_total_khr');
-            $table->foreignIdFor(MemberPoint::class);
+            $table->float('sub_total')->nullable()->default('00.00');
+            $table->float('vat')->nullable()->default('00.00');
+            $table->float('grand_total_usd')->nullable()->default('00.00');
+            $table->float('grand_total_khr')->nullable()->default('00.00');
+            $table->foreignIdFor(MemberPoint::class)->nullable();
             $table->timestamps();
         });
     }

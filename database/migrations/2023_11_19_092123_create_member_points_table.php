@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('member_points', function (Blueprint $table) {
             $table->id();
             $table->string('phone_number');
-            $table->integer('point');
+            $table->integer('point')->nullable()->default(0);
             $table->timestamps();
         });
     }

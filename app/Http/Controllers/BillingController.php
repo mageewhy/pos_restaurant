@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
+use App\Models\PointShop;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillingController extends Controller
 {
     public function create()
     {
         $product = Product::all();
+
         return view('billing.billing', compact('product'));
     }
 

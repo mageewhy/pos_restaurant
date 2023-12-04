@@ -47,7 +47,13 @@
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->productType->type}}</td>
                                     <td><img src="/storage/{{$value->image}}" alt="" width="100"></td>
-                                    <td>{{$value->created_at}}</td>
+                                    <td class="text-danger">
+                                        @if ($value->deleted_at == NULL)
+                                            N/A
+                                        @else
+                                            {{$value->deleted_at}}
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{route('products.edit', $value->id)}}" class="d-flex align-items-center mx-2 col-6">

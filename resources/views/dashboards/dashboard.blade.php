@@ -313,7 +313,9 @@
                                                 <td>{{ $item->invoice_number }}</td>
                                                 <td>${{ $item->grand_total_usd }}</td>
                                                 <td>{{ $item->vat }}</td>
-                                                <td>{{ $item->member ? $item->member->phone_number : '' }}</td>
+                                                <td class="text-success">
+                                                    {{ $item->member ? $item->member->phone_number : '' }}
+                                                </td>
                                                 <td class="text-info">{{ $item->created_at }}</td>
                                             </tr>
                                         @endforeach

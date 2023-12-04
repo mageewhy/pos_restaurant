@@ -1,7 +1,7 @@
-<x-app-layout :assets="$assets ?? []">
-<div class="row">
+<x-app-layout layout="simple" :assets="$assets ?? []">
+<div class="container-fluid m-0 p-0">
     <div class="col-lg-12">
-        <div class="card   rounded">
+        <div class="">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -14,7 +14,7 @@
                                   </div>
                                   <div class="card-body">
                                     <div class="product">
-                                        <img src="/storage/{{$value->image}}" style="width: 100%; height: auto;">
+                                        <img src="/storage/{{$value->image}}" style="width: 100%; height: 200px;">
                                         <div class="size-buttons mt-3">
                                             @foreach ($value->productSizePrice as $item)
                                             <button class="btn btn-primary size-button" data-name="{{$value->name}}" data-id="{{$item->id}}"  data-price="{{$item->price}}">{{$item->size}}</button>
@@ -32,11 +32,11 @@
 
                       <div class="col-md-6">
                         <!-- Order Summary -->
-                        <div class="card">
-                            <div class="card-header">
+                        <div class="container bg-white m-0 p-2">
+                            <div class="container bg-white mb-2">
                                 <h5>Order Summary</h5>
                             </div>
-                            <div class="card-body">
+                            <div class="container bg-white">
                                 <form action="{{route('invoice.store')}}" method="POST">
                                     @csrf
                                     @method('POST')
@@ -54,12 +54,11 @@
                                         </tbody>
                                     </table>
                                     <hr>
-                                    <label for="vat">VAT:</label>
-                                    <input type="text" name="vat" class="form-control mb-3 vat" id="vat" placeholder="Enter VAT %">
+                                    <label for="vat">VAT (%):</label>
+                                    <input type="text" name="vat" class="form-control mb-3 vat" id="vat" placeholder="Enter VAT (%)" value="10">
                                     <input type="text" name="sub_total" class="d-none" id="st">
-                                    <p>Total Before VAT</p>
-                                    <p><strong>Total: ៛<span id="totalKHB">00.00</span></strong></p>
-                                    <p><strong>Total: $<span id="totalUSDB">00.00</span></strong></p>
+                                    <p>Subtotal</p>
+                                    <p><strong>Subtotal: $<span id="totalUSDB">00.00</span></strong></p>
                                     <p>Total After VAT</p>
                                     <p><strong>Total: ៛<span id="totalKH">00.00</span></strong></p>
                                     <p><strong>Total: $<span id="totalUSD">00.00</span></strong></p>
@@ -127,7 +126,6 @@
         totalWithVAT = total + (total * (vat / 100));
 
         $('#st').val(total.toFixed(2));
-        $('#totalKHB').text(total.toFixed(2) * 4000);
         $('#totalUSDB').text(total.toFixed(2));
         $('#totalKH').text(totalWithVAT.toFixed(2) * 4000);
         $('#totalUSD').text(totalWithVAT.toFixed(2));
