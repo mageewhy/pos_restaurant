@@ -56,9 +56,11 @@ class InvoiceController extends Controller
         DB::beginTransaction();
 
         try {
-            $member = MemberPoint::where('phone_number', $request->phoneNumber)->firstOrCreate();
+            $member = null;
+            if ($request->phoneNumber) {
+                $member = MemberPoint::firstOrCreate(['phone_number'=> $request->phoneNumber],['phone_number'=> $request->phoneNumber, 'point' => 0]);
+            }
             $product = [];
-
             foreach ($request->productSizePriceId as $key => $value) {
                 $product[$key]['productSizePriceId'] = $value;
                 $product[$key]['quantity'] = $request->quantity[$key];
@@ -71,12 +73,14 @@ class InvoiceController extends Controller
                 'vat' => $request->vat,
                 'grand_total_usd' => $request->grand_total_usd,
                 'grand_total_khr' => $request->grand_total_khr,
-                'member_point_id' => $member->id,
+                'member_point_id' => $member ? $member->id : null,
             ]);
 
-            $member->update([
-                'point' => $member->point + $request->grand_total_usd * 10
-            ]);
+            if ($member) {
+                $member->update([
+                    'point' => $member->point + $request->grand_total_usd * 10
+                ]);
+            }
 
             DB::commit();
             return redirect()->route('products.index');
