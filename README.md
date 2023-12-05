@@ -72,7 +72,6 @@ npm run dev
 ```
 4. Generate Key for project in terminal or CMD:
 ```
-cp .env.example .env
 
 php artisan key:generate
 ```
