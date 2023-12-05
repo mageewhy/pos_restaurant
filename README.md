@@ -70,12 +70,24 @@ composer install
 ```
 npm run dev
 ```
-4. Generate Key for project in terminal or CMD:
+4. Edit database linking in .env file:
 ```
-
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1 (Your DB host)
+DB_PORT=3306
+DB_DATABASE='Your Database'
+DB_USERNAME=root
+DB_PASSWORD=
+```
+5. Generate Key for project in terminal or CMD:
+```
 php artisan key:generate
 ```
-5. To run the project:
+6. Link project storage in terminal or CMD:
+```
+php artisan storage:link
+```
+7. To run the project:
 ```
 php artisan serve
 ```
