@@ -24,21 +24,20 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="800">
+                            <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1200">
                                 <div class="card-body">
                                     <div class="progress-widget">
-                                        <div id="circle-progress-02"
+                                        <div id="circle-progress-06"
                                             class="circle-progress-01 circle-progress circle-progress-info text-center"
-                                            data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
-                                            <svg class="card-slie-arrow " width="24" height="24"
-                                                viewBox="0 0 24 24">
+                                            data-min-value="0" data-max-value="100" data-value="40" data-type="percent">
+                                            <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                     d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p class="mb-2">Total Profit</p>
-                                            <h4 class="counter text-danger">N/A</h4>
+                                            <p class="mb-2">Today</p>
+                                            <h4 class="counter">${{ $sum_today }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +61,9 @@
                                 </div>
                             </li>
                         </div>
-                        <div class="col-lg-12 d-flex">
+
+                        {{-- Added Feature --}}
+                        {{-- <div class="col-lg-12 d-flex">
                             <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1000">
                                 <div class="card-body">
                                     <div class="progress-widget">
@@ -101,26 +102,27 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="1200">
+                            <li class="col-lg-4 card card-slide" data-aos="fade-up" data-aos-delay="800">
                                 <div class="card-body">
                                     <div class="progress-widget">
-                                        <div id="circle-progress-06"
+                                        <div id="circle-progress-02"
                                             class="circle-progress-01 circle-progress circle-progress-info text-center"
-                                            data-min-value="0" data-max-value="100" data-value="40"
+                                            data-min-value="0" data-max-value="100" data-value="80"
                                             data-type="percent">
-                                            <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
+                                            <svg class="card-slie-arrow " width="24" height="24"
+                                                viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                     d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p class="mb-2">Today</p>
-                                            <h4 class="counter">${{ $sum_today }}</h4>
+                                            <p class="mb-2">Total Profit</p>
+                                            <h4 class="counter text-danger">N/A</h4>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                        </div>
+                        </div> --}}
                     </ul>
                 </div>
             </div>
@@ -283,7 +285,7 @@
                                     {{ $invoices_daily->count() }}
                                 </h5>
                             </div>
-                            <div class="text-end text-info">{{$todayDate}}</div>
+                            <div class="text-end text-info">{{ $todayDate }}</div>
                             {{-- <div class="dropdown">
                                 <span class="dropdown-toggle" id="dropdownMenuButton7" data-bs-toggle="dropdown"
                                     aria-expanded="false" role="button">
@@ -321,6 +323,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="pagination justify-content-center mt-3">
+                                    {{$invoices_daily->links('pagination::bootstrap-4')}}
+                                </div>
                             </div>
                         </div>
                     </div>

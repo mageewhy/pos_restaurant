@@ -13,6 +13,7 @@ class BillingController extends Controller
     public function create()
     {
         $product = Product::all();
+        
 
         return view('billing.billing', compact('product'));
     }
@@ -40,7 +41,7 @@ class BillingController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('point-shops.index');
+            return redirect()->route('billing.create');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', $e->getMessage());

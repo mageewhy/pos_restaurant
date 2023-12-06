@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductSizePrice;
 use App\Models\ProductType;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -45,6 +46,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            // 'name' =>  [
+            //     'required|string|max:255',
+            //     Rule::unique('table_name', 'column_name')->ignore($request)
+            // ],
             'name' => 'required|string|max:255',
             'product_type_id' => 'required',
             'detail' => 'required|string',

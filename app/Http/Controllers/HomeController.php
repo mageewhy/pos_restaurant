@@ -17,7 +17,7 @@ class HomeController extends Controller
         $invoice_all = Invoice::all();
         $invoices_daily = Invoice::whereBetween(
             'created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()]
-            )->latest()->paginate(10);
+            )->latest()->paginate(5);
 
         $todayDate = Carbon::today()->format('F j, Y');
 

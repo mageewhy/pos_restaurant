@@ -3,6 +3,15 @@
     <div class="col-lg-12">
         <div class="">
             <div class="card-body">
+                <div class="container-fluid p-3 mt-3">
+                    <ul class="list-unstyled">
+                        <li>
+                            @foreach ($product as $item)
+                                <a href="#" class="bg-white p-3 rounded">{{$item->productType->type}}</a>
+                            @endforeach
+                        </li>
+                    </ul>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
@@ -17,8 +26,7 @@
                                         <img src="/storage/{{$value->image}}" style="width: 100%; height: 200px;">
                                         <div class="size-buttons mt-3">
                                             @foreach ($value->productSizePrice as $item)
-                                            <button class="btn btn-primary size-button" data-name="{{$value->name}}" data-id="{{$item->id}}"  data-price="{{$item->price}}">{{$item->size}}</button>
-
+                                                <button class="btn btn-primary size-button" data-name="{{$value->name}}" data-id="{{$item->id}}"  data-price="{{$item->price}}">{{$item->size}}</button>
                                             @endforeach
                                         </div>
                                     </div>
