@@ -1,42 +1,44 @@
 <x-app-layout layout="simple" :assets="$assets ?? []">
 <div class="container-fluid m-0 p-0">
     <div class="col-lg-12">
-        <div class="">
             <div class="card-body">
                 <div class="container-fluid p-3 mt-3">
-                    <ul class="list-unstyled">
-                        <li>
-                            @foreach ($product as $item)
-                                <a href="#" class="bg-white p-3 rounded">{{$item->productType->type}}</a>
+                    <nav>
+                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                            @foreach ($productType as $key => $type)
+                                <button class="nav-link {{ $key == 0 ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#{{$type->type}}" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{{$type->type}}</button>
                             @endforeach
-                        </li>
-                    </ul>
+                        </div>
+                    </nav>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="row">
-                            @foreach ($product as $value)
-                            <div class="col-sm-6">
-                                <div class="card">
-                                  <div class="card-header">
-                                    <h5>{{$value->name}}</h5>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="product">
-                                        <img src="/storage/{{$value->image}}" style="width: 100%; height: 200px;">
-                                        <div class="size-buttons mt-3">
-                                            @foreach ($value->productSizePrice as $item)
-                                                <button class="btn btn-primary size-button" data-name="{{$value->name}}" data-id="{{$item->id}}"  data-price="{{$item->price}}">{{$item->size}}</button>
-                                            @endforeach
+                        <div class="tab-content">
+                            @foreach ($product as $key => $value)
+                                <div class="tab-pane fade {{ $key == array_values($productType->toArray())[0]['type'] ? 'show active' : '' }}" id="{{$key}}">
+                                    @foreach ($value as $item)
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>{{$item->name}}</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="product">
+                                                        <img src="/storage/{{$item->image}}" style="width: 100%; height: 200px;">
+                                                        <div class="size-buttons mt-3">
+                                                            @foreach ($item->productSizePrice as $price)
+                                                                <button class="btn btn-primary size-button" data-name="{{$item->name}}" data-id="{{$price->id}}"  data-price="{{$price->price}}">{{$price->size}}</button>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                  </div>
+                                    @endforeach
                                 </div>
-                              </div>
                             @endforeach
                         </div>
-
-                      </div>
+                    </div>
 
                       <div class="col-md-6">
                         <!-- Order Summary -->
