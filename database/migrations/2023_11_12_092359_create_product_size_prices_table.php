@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Product::class);
             $table->string("size");
+            $table->string('drink_type')->default('Hot');
             $table->float("price");
             $table->timestamps();
         });

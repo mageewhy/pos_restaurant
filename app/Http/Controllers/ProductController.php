@@ -33,8 +33,9 @@ class ProductController extends Controller
         $product = Product::all();
         $product_size_price = ProductSizePrice::all();
         $productType = ProductType::all()->pluck('type', 'id')->toArray();
+        $productTypeCheck = ProductType::all();
 
-        return view('products.form', compact('product', 'product_size_price', 'productType'));
+        return view('products.form', compact('product', 'product_size_price', 'productType', 'productTypeCheck'));
     }
 
     /**
@@ -74,12 +75,13 @@ class ProductController extends Controller
                 'image' => $image
             ]);
 
-
+            $drinkType = $request->input('options-base');
 
             foreach ($request->product as $key => $value) {
                 $product->productSizePrice()->create([
                     'size' => $value['size'],
                     'price' => $value['price'],
+                    'type' => $drinkType,
                 ]);
             }
 
@@ -155,11 +157,13 @@ class ProductController extends Controller
 
 
             $product->productSizePrice()->delete();
+            $drinkType = $request->input('options-base');
 
             foreach ($request->product as $key => $value) {
                 $product->productSizePrice()->create([
                     'size' => $value['size'],
                     'price' => $value['price'],
+                    'type' => $drinkType,
                 ]);
             }
 

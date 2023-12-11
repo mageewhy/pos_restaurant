@@ -12,11 +12,12 @@ class Invoice extends Model
     protected $fillable = [
         'invoice_number',
         'product',
+        'quantity',
         'sub_total',
         'vat',
         'grand_total_usd',
         'grand_total_khr',
-        'member_point_id'
+        'member_point_id',
     ];
 
     public function member(){

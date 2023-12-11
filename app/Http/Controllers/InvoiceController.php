@@ -39,25 +39,25 @@ class InvoiceController extends Controller
                 $selectedDate = 'This Week';
                 $startDate = Carbon::now()->startOfWeek();
                 $endDate = Carbon::now()->endOfWeek();
-                $queryDate = $startDate->format('M/j/y') .' to '. $endDate->format('M/j/y');
+                $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
             case 'this_month':
                 $selectedDate = 'This Month';
                 $startDate = Carbon::now()->startOfMonth();
                 $endDate = Carbon::now()->endOfMonth();
-                $queryDate = $startDate->format('M/j/y') .' to '. $endDate->format('M/j/y');
+                $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
             case 'this_year':
                 $selectedDate = 'This Year';
                 $startDate = Carbon::now()->startOfYear();
                 $endDate = Carbon::now()->endOfYear();
-                $queryDate = $startDate->format('M/j/y') .' to '. $endDate->format('M/j/y');
+                $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
             default:
                 $selectedDate = 'This Week';
                 $startDate = Carbon::today()->startOfWeek();
                 $endDate = Carbon::today()->startOfWeek();
-                $queryDate = $startDate->format('M/j/y') .' to '. $endDate->format('M/j/y');
+                $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
         }
 
@@ -73,7 +73,6 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -84,15 +83,15 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $request->validate([
-            'quantity' => 'array',
-            'productSizePriceId' => 'array',
+            'quantity' => 'required|array',
+            'productSizePriceId' => 'required|array',
             'phoneNumber' => 'nullable',
             'sub_total' => 'required',
             'grand_total_usd' => 'required',
             'grand_total_khr' => 'required',
-            'vat' => 'nullable'
+            'vat' => 'nullable',
         ]);
 
         DB::beginTransaction();
@@ -100,18 +99,22 @@ class InvoiceController extends Controller
         try {
             $member = null;
             if ($request->phoneNumber) {
-                $member = MemberPoint::firstOrCreate(['phone_number'=> $request->phoneNumber],['phone_number'=> $request->phoneNumber, 'point' => 0]);
-            }
-            $product = [];
-            foreach ($request->productSizePriceId as $key => $value) {
-                $product[$key]['productSizePriceId'] = $value;
-                $product[$key]['quantity'] = $request->quantity[$key];
+                $member = MemberPoint::firstOrCreate(['phone_number' => $request->phoneNumber], ['phone_number' => $request->phoneNumber, 'point' => 0]);
             }
 
-            Invoice::create([
+            $products = [];
+            $quantities = [];
+
+            foreach ($request->productSizePriceId as $key => $value) {
+                $products[] = $value;
+                $quantities[$value] = $request->quantity[$key];
+            }
+
+            $invoice = Invoice::create([
                 'invoice_number' => 'INV' . time(),
-                'product' => json_encode($product),
-                'sub_total' => $request->total,
+                'product' => json_encode($products),
+                'quantity' => json_encode($quantities),
+                'sub_total' => $request->sub_total,
                 'vat' => $request->vat,
                 'grand_total_usd' => $request->grand_total_usd,
                 'grand_total_khr' => $request->grand_total_khr,
@@ -120,7 +123,7 @@ class InvoiceController extends Controller
 
             if ($member) {
                 $member->update([
-                    'point' => $member->point + $request->grand_total_usd * 10
+                    'point' => $member->point + $request->grand_total_usd * 10,
                 ]);
             }
 
@@ -128,7 +131,6 @@ class InvoiceController extends Controller
             return redirect()->route('billing.create');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
             return back()->with('error', $e->getMessage());
         }
     }
@@ -141,7 +143,6 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**

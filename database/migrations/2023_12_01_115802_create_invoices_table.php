@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->string('invoice_number');
             $table->json('product');
+            $table->json('quantity');
             $table->float('sub_total')->nullable()->default('00.00');
             $table->float('vat')->nullable()->default('00.00');
             $table->float('grand_total_usd')->nullable()->default('00.00');
