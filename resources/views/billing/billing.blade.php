@@ -5,7 +5,7 @@
                 <h3 class="mb-4 text-center pt-3"><b><a href="{{ route('dashboard') }}">POSTAURANT</a></b></h3>
                 <div class="nav flex-column nav-tabs mb-3" id="nav-tab" role="tablist">
                     @foreach ($productType as $key => $type)
-                        <button class="btn btn-outline-warning p-4 mb-2 {{ $key == 0 ? 'active' : '' }} btn-white"
+                        <button class="btn btn-outline-primary p-4 mb-2 {{ $key == 0 ? 'active' : '' }} btn-white"
                             data-bs-toggle="tab" data-bs-target="#{{ $type->type }}" type="button" role="tab"
                             aria-controls="nav-home" aria-selected="true"><b>{{ $type->type }}</b></button>
                     @endforeach
@@ -17,7 +17,7 @@
                     @foreach ($product as $key => $value)
                         <div class="tab-pane fade {{ $key == array_values($productType->toArray())[0]['type'] ? 'show active' : '' }}"
                             id="{{ $key }}">
-                            <div class="d-flex flex-wrap">
+                            <div class="d-flex flex-wrap justify-content-center">
                                 @foreach ($value as $item)
                                     <div class="col-5 mx-2">
                                         <div class="card">
@@ -122,7 +122,7 @@
                         <input type="text" name="grand_total_usd" class="d-none" id="gtu">
                         <input type="text" name="grand_total_khr" class="d-none" id="gtk">
 
-                        <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+                        <button id="checkoutBtn" class="btn btn-primary p-3 rounded-4" style="width: 100%;">Print Receipt</button>
                     </form>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                 // Add new row
                 var tr = document.createElement('tr');
                 var html = '<tr data-id="' + id + '">' +
-                    '<td><div class="row">' + name + '</div></td>' +
+                    '<td>' + name + '</td>' +
                     '<td>' + size + '</td>' +
                     '<td><span class="quantity">1</span>' +
                     '<input type="hidden" name="quantity[' + id +
