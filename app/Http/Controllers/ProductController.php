@@ -68,20 +68,20 @@ class ProductController extends Controller
                 $image = "/" .$request->file('image')->store('images','public');
             }
 
+            $drinkType = $request->input('options-base', 'Hot');
+            
             $product = Product::create([
                 'name' => $request->name,
                 'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
-                'image' => $image
+                'image' => $image,
+                'drink_type' => $drinkType,
             ]);
-
-            $drinkType = $request->input('options-base');
 
             foreach ($request->product as $key => $value) {
                 $product->productSizePrice()->create([
                     'size' => $value['size'],
                     'price' => $value['price'],
-                    'type' => $drinkType,
                 ]);
             }
 
@@ -148,22 +148,23 @@ class ProductController extends Controller
                 $image = "/" .$request->file('image')->store('images','public');
             }
 
+            $drinkType = $request->input('options-base', 'Hot');
+
             $product->update([
                 'name' => $request->name,
                 'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
-                'image' => $image
+                'image' => $image,
+                'drink_type' => $drinkType,
             ]);
 
 
             $product->productSizePrice()->delete();
-            $drinkType = $request->input('options-base');
 
             foreach ($request->product as $key => $value) {
                 $product->productSizePrice()->create([
                     'size' => $value['size'],
                     'price' => $value['price'],
-                    'type' => $drinkType,
                 ]);
             }
 

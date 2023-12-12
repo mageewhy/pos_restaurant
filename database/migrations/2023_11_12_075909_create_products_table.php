@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(ProductType::class);
             $table->string("detail");
             $table->string("image");
+            $table->string('drink_type')->default('Hot');
             $table->timestamps();
             $table->softDeletes();
         });

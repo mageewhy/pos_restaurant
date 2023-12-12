@@ -17,26 +17,35 @@
                     @foreach ($product as $key => $value)
                         <div class="tab-pane fade {{ $key == array_values($productType->toArray())[0]['type'] ? 'show active' : '' }}"
                             id="{{ $key }}">
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex flex-wrap">
                                 @foreach ($value as $item)
-                                    <div class="col-md-4 mx-2">
+                                    <div class="col-5 mx-2">
                                         <div class="card">
                                             <div class="d-flex flex-col p-3">
                                                 <img src="/storage/{{ $item->image }}"
-                                                    style="width: 50%; height: 120px;" class="img-fluid rounded">
+                                                    style="width: 100%; height: 200px;" class="img-fluid rounded">
+                                            </div>
+                                            <div class="d-flex flex-row">
                                                 <div class="mx-4">
                                                     <h5>{{ $item->name }}</h5>
                                                 </div>
+                                                <div class="mx-4">
+                                                    @if ($item->drink_type == 'Hot')
+                                                        Hot
+                                                    @else
+                                                        Cold
+                                                    @endif
+                                                </div>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body d-flex flex-row">
                                                 <div class="product">
                                                     <label>Size</label>
-                                                    <div class="size-buttons mt-2">
+                                                    <div class="mt-2">
                                                         @foreach ($item->productSizePrice as $price)
-                                                            <button class="btn btn-primary size-button rounded-circle"
+                                                            <a class="btn size-button-input rounded-circle"
                                                                 data-name="{{ $item->name }}"
                                                                 data-id="{{ $price->id }}"
-                                                                data-price="{{ $price->price }}">{{ $price->size }}</button>
+                                                                data-price="{{ $price->price }}">{{ $price->size }}</a>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -57,26 +66,30 @@
                         @csrf
                         @method('POST')
 
-                        <table class="table p-5" style="width: 100%;">
-                            <thead>
+                        <table class="table" style="width: 100%;">
+                            {{-- <thead>
                                 <tr>
                                     <th>Product</th>
                                     <th>Size</th>
-                                    <th>Quantity</th>
+                                    <th>Qty</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
-                            </thead>
+                            </thead> --}}
 
-                            <tbody id="productList"></tbody>
+                            <div id="productList"></div>
+                            
                         </table>
 
-                        <hr>
 
+                        {{-- <hr> --}}
 
                         <input type="text" name="sub_total" class="d-none" id="st">
                         {{-- <p>Subtotal</p> --}}
-                        <p><strong>Subtotal: $<span id="totalUSDB" class="align-item-end">00.00</span></strong></p>
+                        <div class="d-flex justify-content-between">
+                            <div><strong>Subtotal:</strong></div>
+                            <div><strong>$<span id="totalUSDB">00.00</span></strong></div>
+                        </div>
 
                         <label for="vat">VAT (%):</label>
                         <input type="text" name="vat" class="form-control mb-3 vat" id="vat"
@@ -89,9 +102,16 @@
                         background-color: #fff;
                         height: 1px;
                         width: 100%;">
-                        <p><strong>Grand Total: ៛<span id="totalKH">00.00</span></strong></p>
-                        <p><strong>Grand Total: $<span id="totalUSD">00.00</span></strong></p>
 
+                        <div class="d-flex justify-content-between">
+                            <div><strong>Grand Total KHR:</strong></div>
+                            <div><strong>៛<span id="totalKH">00.00</span></strong></div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div><strong>Grand Total USD:</strong></div>
+                            <div><strong>$<span id="totalUSD">00.00</span></strong></div>
+                        </div>
+                        
                         <div class="form-group mt-3">
                             <label for="phoneNumber">Phone Number:</label>
                             <input type="text" name="phoneNumber" class="form-control" id="phoneNumber"
@@ -113,7 +133,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.size-button').click(function() {
+        $('.size-button-input').click(function() {
             var name = $(this).data('name');
             var size = $(this).text();
             var id = $(this).data('id');
@@ -133,16 +153,17 @@
                 // Add new row
                 var tr = document.createElement('tr');
                 var html = '<tr data-id="' + id + '">' +
-                    '<td>' + name + '</td>' +
+                    '<td><div class="row">' + name + '</div></td>' +
                     '<td>' + size + '</td>' +
                     '<td><span class="quantity">1</span>' +
                     '<input type="hidden" name="quantity[' + id +
                     ']" class="quantity_input" value="1">' +
                     '<input type="hidden" name="productSizePriceId[' + id + ']" value="' + id +
                     '"></td>' +
-                    '<td>' + price + '</td>' +
-                    '<td><button class="btn btn-danger remove-button">' +
-                    'Remove</button></td></tr>';
+                    '$<td>' + price + '</td>' +
+                    '<td><a class="remove-button">' +
+                    '<svg width="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M19.643 9.48851C19.643 9.5565 19.11 16.2973 18.8056 19.1342C18.615 20.8751 17.4927 21.9311 15.8092 21.9611C14.5157 21.9901 13.2494 22.0001 12.0036 22.0001C10.6809 22.0001 9.38741 21.9901 8.13185 21.9611C6.50477 21.9221 5.38147 20.8451 5.20057 19.1342C4.88741 16.2873 4.36418 9.5565 4.35445 9.48851C4.34473 9.28351 4.41086 9.08852 4.54507 8.93053C4.67734 8.78453 4.86796 8.69653 5.06831 8.69653H18.9388C19.1382 8.69653 19.3191 8.78453 19.4621 8.93053C19.5953 9.08852 19.6624 9.28351 19.643 9.48851Z" fill="currentColor"></path><path d="M21 5.97686C21 5.56588 20.6761 5.24389 20.2871 5.24389H17.3714C16.7781 5.24389 16.2627 4.8219 16.1304 4.22692L15.967 3.49795C15.7385 2.61698 14.9498 2 14.0647 2H9.93624C9.0415 2 8.26054 2.61698 8.02323 3.54595L7.87054 4.22792C7.7373 4.8219 7.22185 5.24389 6.62957 5.24389H3.71385C3.32386 5.24389 3 5.56588 3 5.97686V6.35685C3 6.75783 3.32386 7.08982 3.71385 7.08982H20.2871C20.6761 7.08982 21 6.75783 21 6.35685V5.97686Z" fill="currentColor"></path></svg>' +
+                    '</a></td></tr>';
 
                 $('#productList').append(html);
             }

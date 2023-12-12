@@ -16,6 +16,7 @@ class Product extends Model
         "product_type_id",
         "detail",
         "image",
+        "drink_type",
     ];
 
     public function productSizePrice()

@@ -18,46 +18,7 @@
                                     <input type="text" class="form-control" name="name" id="validationProductName"
                                         required>
                                 </div>
-
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label" for="validationType">Product Type</label>
-                                    <select name="product_type_id" class="form-select">
-                                        <option selected disabled>Select Product Type</option>
-                                        @foreach ($productType as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-md-12 mb-4">
-                                    <label for="validationDetail" class="form-label">Detail</label>
-                                    <textarea name="detail" id="validationDetail" class="form-control"></textarea>
-                                </div>
-
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label" for="file">Image</label>
-                                    <input type="file" name="image" class="form-control" id="file" required>
-                                </div>
-
-                                <div class="col-md-6 mb-4 drink-types-container">
-                                    <label class="form-label">Drink Types</label>
-                                    <div class="row">
-                                        <div class="form-check d-block col-3">
-                                            <input type="radio" class="btn-check" name="options-base" id="hot"
-                                                autocomplete="off" checked>
-                                            <label class="btn" for="hot">Hot</label>
-                                        </div>
-                                        <div class="form-check d-block col-3">
-                                            <input type="radio" class="btn-check" name="options-base" id="cold"
-                                                autocomplete="off">
-                                            <label class="btn" for="cold">Cold</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                {{-- <div class="col-md-6 mb-4">
                                     <label class="form-label" for="validationType">Product Type</label>
                                     <select name="product_type_id" class="form-select">
                                         <option selected disabled>Select Product Type</option>
@@ -80,16 +41,16 @@
                                     <div class="row">
                                         <div class="form-check d-block col-3">
                                             <input type="radio" class="btn-check" name="options-base" id="hot"
-                                                autocomplete="off" checked>
+                                                autocomplete="off" value="Hot" checked>
                                             <label class="btn" for="hot">Hot</label>
                                         </div>
                                         <div class="form-check d-block col-3">
                                             <input type="radio" class="btn-check" name="options-base" id="cold"
-                                                autocomplete="off">
+                                                autocomplete="off" value="Cold">
                                             <label class="btn" for="cold">Cold</label>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="col-md-12 shadow-lg p-3 mb-5 bg-white rounded">
                                 <div id="sizeprice" class="row">
@@ -187,30 +148,5 @@
             sizePrice.removeChild(sizePrice.lastElementChild);
             count--;
         }
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const productTypeSelect = document.querySelector('select[name="product_type_id"]');
-        const drinkTypesContainer = document.querySelector('.drink-types-container');
-        const hotRadio = document.getElementById('hot');
-        const coldRadio = document.getElementById('cold');
-
-        // Disable/enable drink types based on product type selection
-        productTypeSelect.addEventListener('change', function() {
-            const selectedProductType = productTypeSelect.value;
-            if (selectedProductType.toLowerCase() === 'frappe') {
-                // drinkTypesContainer.style.display = 'none';
-                hotRadio.disabled = true;
-                coldRadio.disabled = true;
-            } else {
-                // drinkTypesContainer.style.display = 'block';
-                hotRadio.disabled = false;
-                coldRadio.disabled = false;
-            }
-        });
-
-        // Trigger initial change event to set the initial state
-        productTypeSelect.dispatchEvent(new Event('change'));
     });
 </script>
