@@ -1,6 +1,6 @@
 <x-app-layout layout="billing" :assets="$assets ?? []">
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid p-0 m-0">
+        <div class="row m-0">
             <div class="col-2 sidebar-container" style="height: 100vh; background-color: white;">
                 <h3 class="mb-4 text-center pt-3"><b><a href="{{ route('dashboard') }}">POSTAURANT</a></b></h3>
                 <div class="nav flex-column nav-tabs mb-3" id="nav-tab" role="tablist">
@@ -25,7 +25,7 @@
                                                 <img src="/storage/{{ $item->image }}"
                                                     style="width: 100%; height: 200px;" class="img-fluid rounded">
                                             </div>
-                                            <div class="d-flex flex-row">
+                                            <div class="d-flex flex-row justify-content-between">
                                                 <div class="mx-4">
                                                     <h5>{{ $item->name }}</h5>
                                                 </div>
@@ -37,7 +37,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="card-body d-flex flex-row">
+                                            <div class="card-body d-flex flex-row justify-content-between">
                                                 <div class="product">
                                                     <label>Size</label>
                                                     <div class="mt-2">

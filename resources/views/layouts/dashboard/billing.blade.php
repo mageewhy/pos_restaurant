@@ -32,7 +32,7 @@
     @include('partials.dashboard._head')
     <style>
         .sidebar-billing {
-            position: fixed;
+            /* position: fixed; */
             top: 0;
             left: 0;
             height: 100vh;
@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body class data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
+<body>
 
     @if (auth()->guest())
         @include('partials.dashboard._body7')
