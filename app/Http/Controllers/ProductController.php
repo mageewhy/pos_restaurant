@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductSizePrice;
 use App\Models\ProductType;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -32,8 +33,9 @@ class ProductController extends Controller
         $product = Product::all();
         $product_size_price = ProductSizePrice::all();
         $productType = ProductType::all()->pluck('type', 'id')->toArray();
+        $productTypeCheck = ProductType::all();
 
-        return view('products.form', compact('product', 'product_size_price', 'productType'));
+        return view('products.form', compact('product', 'product_size_price', 'productType', 'productTypeCheck'));
     }
 
     /**
@@ -45,6 +47,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            // 'name' =>  [
+            //     'required|string|max:255',
+            //     Rule::unique('table_name', 'column_name')->ignore($request)
+            // ],
             'name' => 'required|string|max:255',
             'product_type_id' => 'required',
             'detail' => 'required|string',
@@ -62,14 +68,15 @@ class ProductController extends Controller
                 $image = "/" .$request->file('image')->store('images','public');
             }
 
+            $drinkType = $request->input('options-base', 'Hot');
+            
             $product = Product::create([
                 'name' => $request->name,
                 'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
-                'image' => $image
+                'image' => $image,
+                'drink_type' => $drinkType,
             ]);
-
-
 
             foreach ($request->product as $key => $value) {
                 $product->productSizePrice()->create([
@@ -141,11 +148,14 @@ class ProductController extends Controller
                 $image = "/" .$request->file('image')->store('images','public');
             }
 
+            $drinkType = $request->input('options-base', 'Hot');
+
             $product->update([
                 'name' => $request->name,
                 'product_type_id'=> $request->product_type_id,
                 'detail'=> $request->detail,
-                'image' => $image
+                'image' => $image,
+                'drink_type' => $drinkType,
             ]);
 
 
@@ -176,5 +186,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::find($id)->delete();
+
+        return redirect()->route('products.index');
     }
 }

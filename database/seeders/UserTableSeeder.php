@@ -27,27 +27,16 @@ class UserTableSeeder extends Seeder
                 'user_type' => 'admin',
                 'status' => 'active',
             ],
-            [
-                'first_name' => 'Demo',
-                'last_name' => 'Admin',
-                'username' => 'demoadmin',
-                'email' => 'demo@example.com',
-                'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
-                'email_verified_at' => now(),
-                'user_type' => 'demo_admin',
-            ],
-            [
-                'first_name' => 'John',
-                'last_name' => 'User',
-                'username' => 'user',
-                'email' => 'user@example.com',
-                'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
-                'email_verified_at' => now(),
-                'user_type' => 'user',
-                'status' => 'inactive'
-            ]
+            // [
+            //     'first_name' => 'Demo',
+            //     'last_name' => 'Admin',
+            //     'username' => 'demoadmin',
+            //     'email' => 'demo@example.com',
+            //     'password' => bcrypt('password'),
+            //     'phone_number' => '+12398190255',
+            //     'email_verified_at' => now(),
+            //     'user_type' => 'demo_admin',
+            // ],
         ];
         foreach ($users as $key => $value) {
             $user = User::create($value);

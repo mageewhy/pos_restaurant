@@ -21,7 +21,7 @@
                 </svg>
             </i>
         </div>
-        <div class="input-group search-input">
+        {{-- <div class="input-group search-input">
             <span class="input-group-text" id="search-input">
                 <svg width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5"
@@ -31,7 +31,7 @@
                 </svg>
             </span>
             <input type="search" class="form-control" placeholder="Search...">
-        </div>
+        </div> --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('images/Flag/flag001.png') }}" class="img-fluid rounded-circle"
@@ -78,8 +78,8 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
+                </li> --}}
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link" id="notification-drop" data-bs-toggle="dropdown">
                         <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -241,10 +241,10 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
-                    <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('images/avatars/01.png') }}" alt="User-Profile"
                             class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
                         <img src="{{ asset('images/avatars/avtar_1.png') }}" alt="User-Profile"
@@ -266,23 +266,23 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('users.show', auth()->id() || 1) }}">Profile</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('auth.userprivacysetting') }}">Privacy
+                        {{-- <li><a class="dropdown-item" href="{{ route('auth.userprivacysetting') }}">Privacy
                                 Setting</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a href="javascript:void(0)" class="dropdown-item"
-                                    onclick="event.preventDefault();
-              this.closest('form').submit();">
-                                    {{ __('Log out') }}
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
+                        <li> --}}
+                        <hr class="dropdown-divider">
                 </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="javascript:void(0)" class="dropdown-item"
+                            onclick="event.preventDefault();
+              this.closest('form').submit();">
+                            {{ __('Log out') }}
+                        </a>
+                    </form>
+                </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </div>

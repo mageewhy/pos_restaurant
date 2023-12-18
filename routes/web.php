@@ -8,10 +8,16 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 // Packages
 use Illuminate\Support\Facades\Route;
+
+
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,24 +37,6 @@ Route::get('/storage', function () {
 });
 
 
-//Landing-Pages Routes
-// Route::group(['prefix' => 'landing-pages'], function() {
-// Route::get('index',[HomeController::class, 'landing_index'])->name('landing-pages.index');
-// Route::get('blog',[HomeController::class, 'landing_blog'])->name('landing-pages.blog');
-// Route::get('blog-detail',[HomeController::class, 'landing_blog_detail'])->name('landing-pages.blog-detail');
-// Route::get('about',[HomeController::class, 'landing_about'])->name('landing-pages.about');
-// Route::get('contact',[HomeController::class, 'landing_contact'])->name('landing-pages.contact');
-// Route::get('ecommerce',[HomeController::class, 'landing_ecommerce'])->name('landing-pages.ecommerce');
-// Route::get('faq',[HomeController::class, 'landing_faq'])->name('landing-pages.faq');
-// Route::get('feature',[HomeController::class, 'landing_feature'])->name('landing-pages.feature');
-// Route::get('pricing',[HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
-// Route::get('saas',[HomeController::class, 'landing_saas'])->name('landing-pages.saas');
-// Route::get('shop',[HomeController::class, 'landing_shop'])->name('landing-pages.shop');
-// Route::get('shop-detail',[HomeController::class, 'landing_shop_detail'])->name('landing-pages.shop-detail');
-// Route::get('software',[HomeController::class, 'landing_software'])->name('landing-pages.software');
-// Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-pages.startup');
-// });
-
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
 
@@ -60,6 +48,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/pages', [PagesController::class, 'index'])->name('pages');
+    // Product Routes
+
+
+    // Route::get('/pages', 'PagesController@pages')->name('pages');
+    // Route::get('/pages', [PagesController::class, 'pages'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/products', [ProductController::class, 'index']);
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // Users Module
     Route::resource('users', UserController::class);
@@ -67,12 +64,16 @@ Route::group(['middleware' => 'auth'], function () {
     //Product Module
     Route::resource('products', ProductController::class);
 
+    Route::resource('invoices', InvoiceController::class);
+
     //Point Shops
     Route::resource('point-shops', PointShopController::class);
     Route::post('/member-redeem/{productId}',[PointShopController::class, 'memberRedeem'])->name('memberRedeem');
 
     //Product Module
     Route::resource('product_types', ProductTypeController::class);
+
+    Route::resource('billing', BillingController::class);
 
     //App Details Page => 'Dashboard'], function() {
     Route::group(['prefix' => 'menu-style'], function() {
@@ -108,7 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('vector', [HomeController::class, 'vector'])->name('maps.vector');
     });
 
-    //Auth pages Routs
+    //Auth pages Routes
     Route::group(['prefix' => 'auth'], function() {
         Route::get('signin', [HomeController::class, 'signin'])->name('auth.signin');
         Route::get('signup', [HomeController::class, 'signup'])->name('auth.signup');
@@ -126,6 +127,38 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
+
+//Extra Page Routs
+Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
+Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('pages', [PagesController::class, 'index'])->name('pages');
+    Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+});
+
+
+
+
+//Landing-Pages Routes
+// Route::group(['prefix' => 'landing-pages'], function() {
+// Route::get('index',[HomeController::class, 'landing_index'])->name('landing-pages.index');
+// Route::get('blog',[HomeController::class, 'landing_blog'])->name('landing-pages.blog');
+// Route::get('blog-detail',[HomeController::class, 'landing_blog_detail'])->name('landing-pages.blog-detail');
+// Route::get('about',[HomeController::class, 'landing_about'])->name('landing-pages.about');
+// Route::get('contact',[HomeController::class, 'landing_contact'])->name('landing-pages.contact');
+// Route::get('ecommerce',[HomeController::class, 'landing_ecommerce'])->name('landing-pages.ecommerce');
+// Route::get('faq',[HomeController::class, 'landing_faq'])->name('landing-pages.faq');
+// Route::get('feature',[HomeController::class, 'landing_feature'])->name('landing-pages.feature');
+// Route::get('pricing',[HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
+// Route::get('saas',[HomeController::class, 'landing_saas'])->name('landing-pages.saas');
+// Route::get('shop',[HomeController::class, 'landing_shop'])->name('landing-pages.shop');
+// Route::get('shop-detail',[HomeController::class, 'landing_shop_detail'])->name('landing-pages.shop-detail');
+// Route::get('software',[HomeController::class, 'landing_software'])->name('landing-pages.software');
+// Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-pages.startup');
+// });
+
 
 // //Forms Pages Routs
 // Route::group(['prefix' => 'forms'], function() {
@@ -148,6 +181,7 @@ Route::group(['middleware' => 'auth'], function () {
 //     Route::get('dualtone', [HomeController::class, 'dualtone'])->name('icons.dualtone');
 //     Route::get('colored', [HomeController::class, 'colored'])->name('icons.colored');
 // });
-//Extra Page Routs
-Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('pages.privacy-policy');
-Route::get('terms-of-use', [HomeController::class, 'termsofuse'])->name('pages.term-of-use');
+
+// Route::(get(/page), function(){
+//     return view('page')
+// });

@@ -21,7 +21,7 @@
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label" for="validationType">Product Type</label>
                                     <select name="product_type_id" class="form-select">
-                                        {{-- @dd($data->product_type_id) --}}
+                                        <option selected disabled>Select Product Type</option>
                                         @foreach ($productType as $key => $value)
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
@@ -31,9 +31,25 @@
                                     <label for="validationDetail" class="form-label">Detail</label>
                                     <textarea name="detail" id="validationDetail" class="form-control"></textarea>
                                 </div>
-                                <div class="col-md-12 mb-4">
+
+                                <div class="col-md-6 mb-4">
                                     <label class="form-label" for="file">Image</label>
                                     <input type="file" name="image" class="form-control" id="file" required>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Drink Types</label>
+                                    <div class="row">
+                                        <div class="form-check d-block col-3">
+                                            <input type="radio" class="btn-check" name="options-base" id="hot"
+                                                autocomplete="off" value="Hot" checked>
+                                            <label class="btn" for="hot">Hot</label>
+                                        </div>
+                                        <div class="form-check d-block col-3">
+                                            <input type="radio" class="btn-check" name="options-base" id="cold"
+                                                autocomplete="off" value="Cold">
+                                            <label class="btn" for="cold">Cold</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12 shadow-lg p-3 mb-5 bg-white rounded">
@@ -82,7 +98,8 @@
                                                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                                     stroke-linejoin="round"></path>
                                                 <path d="M14.2926 13.7471H9.39258" stroke="currentColor"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
                                                 </path>
                                             </svg>
                                         </div>

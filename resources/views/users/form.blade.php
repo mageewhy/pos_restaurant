@@ -43,6 +43,7 @@
                                 </div>
                             </div>
                         </div>
+                        @if (auth()->user()->can('permission'))
                         <div class="form-group">
                             <label class="form-label">Status:</label>
                             <div class="grid" style="--bs-gap: 1rem">
@@ -72,10 +73,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">User Role: <span class="text-danger">*</span></label>
-                            {{ Form::select('user_role', $roles, old('user_role') ? old('user_role') : $data->user_type ?? 'user', ['class' => 'form-control', 'placeholder' => 'Select User Role']) }}
-                        </div>
+
+                            <div class="form-group">
+                                <label class="form-label">User Role: <span class="text-danger">*</span></label>
+                                {{ Form::select('user_role', $roles, old('user_role') ? old('user_role') : $data->user_type ?? 'user', ['class' => 'form-control', 'placeholder' => 'Select User Role']) }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -86,7 +89,11 @@
                             <h4 class="card-title">{{ $id !== null ? 'Update' : 'New' }} User Information</h4>
                         </div>
                         <div class="card-action">
-                            <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary" role="button">Back</a>
+                            @if (auth()->user()->can('permission'))
+                                <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary" role="button">Back</a>
+                            @else
+                                <a href="{{ route('users.show', auth()->user()->id)}}" class="btn btn-sm btn-primary" role="button">Back</a>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
@@ -102,14 +109,14 @@
                                             class="text-danger">*</span></label>
                                     {{ Form::text('last_name', old('last_name'), ['class' => 'form-control', 'placeholder' => 'Last Name', 'required']) }}
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label class="form-label" for="add1">Street Address 1:</label>
                                     {{ Form::text('userProfile[street_addr_1]', old('userProfile[street_addr_1]'), ['class' => 'form-control', 'id' => 'add1', 'placeholder' => 'Enter Street Address 1']) }}
                                 </div>
-                                <div class="form-group col-md-6">
+                                {{-- <div class="form-group col-md-6">
                                     <label class="form-label" for="add2">Street Address 2:</label>
                                     {{ Form::text('userProfile[street_addr_2]', old('userProfile[street_addr_2]'), ['class' => 'form-control', 'id' => 'add2', 'placeholder' => 'Enter Street Address 2']) }}
-                                </div>
+                                </div> --}}
                                 <div class="form-group col-md-12">
                                     <label class="form-label" for="cname">Company Name: <span
                                             class="text-danger">*</span></label>
@@ -134,7 +141,7 @@
                                     {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter e-mail', 'required']) }}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="form-label" for="pno">Pin Code:</label>
+                                    <label class="form-label" for="pno">Postal Code:</label>
                                     {{ Form::number('userProfile[pin_code]', old('userProfile[pin_code]'), ['class' => 'form-control', 'id' => 'pin_code', 'step' => 'any']) }}
                                 </div>
                                 <div class="form-group col-md-12">

@@ -13,4 +13,8 @@ class MemberPoint extends Model
         'phone_number',
         'point',
     ];
+
+    public function invoice(){
+        return $this->hasMany(Invoice::class);
+    }
 }

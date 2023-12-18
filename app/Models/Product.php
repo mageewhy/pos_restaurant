@@ -16,10 +16,19 @@ class Product extends Model
         "product_type_id",
         "detail",
         "image",
+        "drink_type",
     ];
 
     public function productSizePrice()
     {
         return $this->hasMany(ProductSizePrice::class);
+    }
+
+    public function productType(){
+        return $this->belongsTo(ProductType::class);
+    }
+
+    public function invoices(){
+        return $this->belongsTo(Invoice::class);
     }
 }

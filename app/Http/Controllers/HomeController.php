@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
+use App\Models\MemberPoint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,8 +14,94 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets'));
+        $invoice_all = Invoice::all();
+        $invoices_daily = Invoice::whereBetween(
+            'created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()]
+            )->latest()->paginate(5);
+
+        $todayDate = Carbon::today()->format('F j, Y');
+
+        $member = MemberPoint::all();
+
+        $dateRange = $request->input('date');
+
+        // Perform the query based on the selected date range
+        switch ($dateRange) {
+            case 'today':
+                $selectedDate = 'Today';
+                $startDate = Carbon::today()->startOfDay();
+                $endDate = Carbon::today()->endOfDay();
+                break;
+            case 'this_week':
+                $selectedDate = 'This Week';
+                $startDate = Carbon::now()->startOfWeek();
+                $endDate = Carbon::now()->endOfWeek();
+                break;
+            case 'this_month':
+                $selectedDate = 'This Month';
+                $startDate = Carbon::now()->startOfMonth();
+                $endDate = Carbon::now()->endOfMonth();
+                break;
+            case 'this_year':
+                $selectedDate = 'This Year';
+                $startDate = Carbon::now()->startOfYear();
+                $endDate = Carbon::now()->endOfYear();
+                break;
+            default:
+                $selectedDate = 'Today';
+                $startDate = Carbon::today()->startOfDay();
+                $endDate = Carbon::today()->endOfDay();
+                break;
+        }
+
+        $invoice_sales = Invoice::whereBetween('created_at', [$startDate, $endDate])->get();
+        $sales_today = Invoice::whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])->get();
+        $sum_today = 0;
+        $sum_total = 0;
+
+        foreach($sales_today as $sale_tday){
+            $sum_today += $sale_tday->grand_total_usd;
+        };
+
+        foreach($invoice_all as $sale_total){
+            $sum_total += $sale_total->grand_total_usd;
+        };
+
+        $sales_usd = [];
+        $sales_khr = [];
+        $formattedDates = [];
+
+        foreach ($invoice_sales as $invoice) {
+            $sales_usd[] = $invoice->grand_total_usd;
+            $sales_khr[] = $invoice->grand_total_khr;
+            $formattedDate = Carbon::parse($invoice->created_at)->format('M j, Y');
+            $formattedDates[] = $formattedDate;
+        }
+
+        $chartData = [
+            'sales_usd' => $sales_usd,
+            'sales_khr' => $sales_khr,
+            'date' => $formattedDates,
+        ];
+
+        $sum_usd = array_sum($sales_usd);
+        $sum_khr = array_sum($sales_khr);
+
+        // dd($chartData);
+        $assets = ['animation'];
+        return view('dashboards.dashboard',
+        compact(
+            'assets',
+            'invoices_daily',
+            'chartData',
+            'sum_khr',
+            'sum_usd',
+            'selectedDate',
+            'sum_today',
+            'sum_total',
+            'member',
+            'todayDate'
+            ));
     }
 
     /*
@@ -21,27 +110,27 @@ class HomeController extends Controller
     public function horizontal(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('menu-style.horizontal',compact('assets'));
+        return view('menu-style.horizontal', compact('assets'));
     }
     public function dualhorizontal(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('menu-style.dual-horizontal',compact('assets'));
+        return view('menu-style.dual-horizontal', compact('assets'));
     }
     public function dualcompact(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('menu-style.dual-compact',compact('assets'));
+        return view('menu-style.dual-compact', compact('assets'));
     }
     public function boxed(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('menu-style.boxed',compact('assets'));
+        return view('menu-style.boxed', compact('assets'));
     }
     public function boxedfancy(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('menu-style.boxed-fancy',compact('assets'));
+        return view('menu-style.boxed-fancy', compact('assets'));
     }
 
     /*
@@ -55,7 +144,7 @@ class HomeController extends Controller
     public function calender(Request $request)
     {
         $assets = ['calender'];
-        return view('special-pages.calender',compact('assets'));
+        return view('special-pages.calender', compact('assets'));
     }
 
     public function kanban(Request $request)
@@ -180,7 +269,7 @@ class HomeController extends Controller
         return view('forms.validation');
     }
 
-     /*
+    /*
      * Table Page Routs
      */
     public function bootstraptable(Request $request)

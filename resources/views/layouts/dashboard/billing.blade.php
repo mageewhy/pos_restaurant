@@ -10,7 +10,7 @@
     <title>{{ env('APP_NAME') }} | Responsive Bootstrap 5 Admin Dashboard Template</title>
     <!-- Google Tag Manager -->
 
-    <script>
+    {{-- <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -28,17 +28,24 @@
         window.tag_manager_event = 'dashboard-free-preview';
         window.tag_manager_product = 'POSTAURANT';
     </script>
-    <!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager --> --}}
     @include('partials.dashboard._head')
+    <style>
+        .sidebar-billing {
+            /* position: fixed; */
+            top: 0;
+            left: 0;
+            height: 100vh;
+        }
+    </style>
 </head>
 
-<body class data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
+<body>
 
     @if (auth()->guest())
         @include('partials.dashboard._body7')
     @else
-        @include('partials.dashboard._body_header')
-        @include('partials.dashboard._body7')
+        @include('partials.dashboard._billing')
     @endif
 </body>
 

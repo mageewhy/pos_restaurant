@@ -13,4 +13,8 @@ class ProductType extends Model
         "id",
         "type",
     ];
+
+    public function product(){
+        return $this->hasMany(Product::class);
+    }
 }
