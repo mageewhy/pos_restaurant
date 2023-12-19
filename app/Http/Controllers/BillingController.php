@@ -15,7 +15,7 @@ class BillingController extends Controller
     {
         $product = Product::with('productType')->get()->groupBy('productType.type');
         $productType = ProductType::all();
-
+        
         return view('billing.billing', compact('product', 'productType'));
     }
 

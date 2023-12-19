@@ -37,11 +37,24 @@
                                     <input type="file" name="image" class="form-control" id="file" required>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">Drink Types</label>
+                                    <label class="form-label">Drink Types
+                                        <a class="btn p-0" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Don't Select If Not
+                                                Drinks">
+                                            <svg width="20" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.4"
+                                                    d="M16.34 1.99976H7.67C4.28 1.99976 2 4.37976 2 7.91976V16.0898C2 19.6198 4.28 21.9998 7.67 21.9998H16.34C19.73 21.9998 22 19.6198 22 16.0898V7.91976C22 4.37976 19.73 1.99976 16.34 1.99976Z"
+                                                    fill="currentColor"></path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M11.1246 8.18921C11.1246 8.67121 11.5156 9.06421 11.9946 9.06421C12.4876 9.06421 12.8796 8.67121 12.8796 8.18921C12.8796 7.70721 12.4876 7.31421 12.0046 7.31421C11.5196 7.31421 11.1246 7.70721 11.1246 8.18921ZM12.8696 11.362C12.8696 10.88 12.4766 10.487 11.9946 10.487C11.5126 10.487 11.1196 10.88 11.1196 11.362V15.782C11.1196 16.264 11.5126 16.657 11.9946 16.657C12.4766 16.657 12.8696 16.264 12.8696 15.782V11.362Z"
+                                                    fill="currentColor"></path>
+                                            </svg> </a>
+                                    </label>
                                     <div class="row">
                                         <div class="form-check d-block col-3">
                                             <input type="radio" class="btn-check" name="options-base" id="hot"
-                                                autocomplete="off" value="Hot" checked>
+                                                autocomplete="off" value="Hot">
                                             <label class="btn" for="hot">Hot</label>
                                         </div>
                                         <div class="form-check d-block col-3">
@@ -77,10 +90,12 @@
                                                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                                     stroke-linejoin="round"></path>
                                                 <path d="M14.2936 12.9141H9.39355" stroke="currentColor"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
                                                 </path>
                                                 <path d="M11.8442 15.3639V10.4639" stroke="currentColor"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
                                                 </path>
                                             </svg>
                                         </div>

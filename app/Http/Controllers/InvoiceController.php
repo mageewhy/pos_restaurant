@@ -6,6 +6,8 @@ use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\MemberPoint;
 use App\Models\ProductSizePrice;
+use App\Models\User;
+use App\Models\UserProfile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +21,13 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Invoice::latest()->paginate(10);
-
+        
         // $todayDate = Carbon::today()->format('F j, Y');
-
+        
         $member = MemberPoint::all();
 
         $dateRange = $request->input('date');
-
+        
         // Perform the query based on the selected date range
         switch ($dateRange) {
             case 'today':
@@ -35,13 +36,13 @@ class InvoiceController extends Controller
                 $endDate = Carbon::today()->endOfDay();
                 $queryDate = $startDate->format('M/j/y');
                 break;
-            case 'this_week':
-                $selectedDate = 'This Week';
-                $startDate = Carbon::now()->startOfWeek();
-                $endDate = Carbon::now()->endOfWeek();
-                $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
-                break;
-            case 'this_month':
+                case 'this_week':
+                    $selectedDate = 'This Week';
+                    $startDate = Carbon::now()->startOfWeek();
+                    $endDate = Carbon::now()->endOfWeek();
+                    $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
+                    break;
+                    case 'this_month':
                 $selectedDate = 'This Month';
                 $startDate = Carbon::now()->startOfMonth();
                 $endDate = Carbon::now()->endOfMonth();
@@ -53,26 +54,32 @@ class InvoiceController extends Controller
                 $endDate = Carbon::now()->endOfYear();
                 $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
-            default:
+                default:
                 $selectedDate = 'This Week';
                 $startDate = Carbon::today()->startOfWeek();
-                $endDate = Carbon::today()->startOfWeek();
+                $endDate = Carbon::today()->endOfWeek();
                 $queryDate = $startDate->format('M/j/y') . ' to ' . $endDate->format('M/j/y');
                 break;
+            }
+            
+            // $data = Invoice::latest()->paginate(10);
+            $invoice_sales = Invoice::whereBetween('created_at', [$startDate, $endDate])->paginate(10);
+            
+            return view('invoices.list', compact('invoice_sales', 'selectedDate', 'queryDate'));
         }
 
-        $invoice_sales = Invoice::whereBetween('created_at', [$startDate, $endDate])->paginate(10);
-
-        return view('invoices.list', compact('data', 'invoice_sales', 'selectedDate', 'queryDate'));
-    }
-
-    /**
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        $user = User::where('id', '2')->first();
+        $invoice = Invoice::where('id', '1')->first();
+
+        $date = $invoice->created_at->format('Y-m-d H:i:s');
+        return view('invoices.generate', compact('invoice', 'user', 'date'));
     }
 
     /**
