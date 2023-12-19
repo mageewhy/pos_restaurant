@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class);
 
     Route::resource('invoices', InvoiceController::class);
+    Route::get('invoices/create/{id}', [InvoiceController::class, 'create'])->name('print_invoice');
 
     //Point Shops
     Route::resource('point-shops', PointShopController::class);

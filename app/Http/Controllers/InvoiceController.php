@@ -73,13 +73,16 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $user = User::where('id', '2')->first();
-        $invoice = Invoice::where('id', '1')->first();
+        $user = User::where('id', auth()->user()->id)->first();
+        $invoice = Invoice::where('id', $id)->first();
+
+        $productSizePrice = ProductSizePrice::whereIn('id',json_decode($invoice->product, true))->get();
+        $qty = json_decode($invoice->quantity, true);
 
         $date = $invoice->created_at->format('Y-m-d H:i:s');
-        return view('invoices.generate', compact('invoice', 'user', 'date'));
+        return view('invoices.generate', compact('invoice', 'user', 'date', 'productSizePrice', 'qty'));
     }
 
     /**
@@ -135,7 +138,7 @@ class InvoiceController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('billing.create');
+            return redirect()->route('print_invoice', $invoice->id);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', $e->getMessage());

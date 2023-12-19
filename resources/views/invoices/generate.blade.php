@@ -34,14 +34,16 @@
                         <th>Size</th>
                         <th>Qty</th>
                         <th>Price</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($invoice as $item)
+                    @foreach ($productSizePrice as $item)
+                    {{-- @dd($item) --}}
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $item->product->name }}</td>
+                            <td>{{ $item->size }}</td>
+                            <td>{{ $qty[$item->id] }}</td>
+                            <td>{{ $item->price }}</td>
                         </tr>
                     @endforeach
 
@@ -50,11 +52,11 @@
             </table>
 
 
-            <hr>
+            {{-- <hr> --}}
 
             <div class="d-flex justify-content-between">
                 <div><strong><label>Subtotal:</label></strong></div>
-                <div><strong>$<span id="totalUSDB">00.00</span></strong></div>
+                <div><strong>$<span id="totalUSDB">{{ $invoice->sub_total }}</span></strong></div>
             </div>
 
             <div class="d-flex justify-content-between">
